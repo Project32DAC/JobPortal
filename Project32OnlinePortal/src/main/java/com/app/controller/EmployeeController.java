@@ -1,7 +1,5 @@
 package com.app.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.UserLoginRequest;
 import com.app.dto.UserSignupRequest;
-import com.app.entities.User;
+import com.app.service.IEmployeeService;
 import com.app.service.IUserService;
 
 @RestController // @Controller + @ResponseBody //i.e to pass respone in json so it is deserializon: added on ret types of req handling methods
-@RequestMapping("/user")
-public class UserController {
-	// dep : user service i/f
+@RequestMapping("/employee")
+public class EmployeeController {
 	@Autowired
-	private IUserService userService;
+	private IEmployeeService userService;
 
-	public UserController() {
-		System.out.println("in ctor of " + getClass());
-	}
+	
 
 	// add REST API end point to serve list of users
-	@GetMapping//http://localhost:8080/users in get methog
-	public ResponseEntity<?> fetchAllUsers() {
+	@PostMapping("/edit/{id}")
+	public ResponseEntity<?> employeeEdit(@PathVariable int id) {
 		System.out.println("in get all users");
+		
 		return  ResponseEntity.ok(userService.getAllUsers());//u can send object wrap in response entity //or with status code or see readme
 	}
 
@@ -59,5 +55,6 @@ public class UserController {
 		// return null;
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerNewUser(request));
 	}
+	
 
 }
