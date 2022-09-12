@@ -1,0 +1,13 @@
+On "/register" show Register form :
+ 
+on submit => post request "/signup" 
+ 
+required json format : 
+{
+"firstName" : value
+"lastName" :    
+"email" :
+"password" : 
+"userRole" : 
+} 
+
