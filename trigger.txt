@@ -7,15 +7,15 @@
     
 
 
-
-
-use dac22_project;
 drop  database dac22_project;
 create database  dac22_project;
+use dac22_project;
+
+
 show tables;
 select * from users;
-drop table employees;
 select * from employees;
+
 
 drop trigger User_to_employee;
  delimiter #
@@ -28,4 +28,3 @@ insert into employees(email, first_name, last_name, password,gender) values (new
  
  
 insert into users values (default,"email11@gmail.com", "first_name1", "last_name1", "1231", "EMPLOYEE");
-desc employees
