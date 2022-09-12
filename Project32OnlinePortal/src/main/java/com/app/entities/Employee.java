@@ -32,30 +32,30 @@ import lombok.ToString;
 @Getter
 
 public class Employee extends BaseEntity {
-   
+  
 	@Column(name = "first_name", length = 20)
 	private String firstName;
 	@Column(name = "last_name", length = 30) 
 	private String lastName;
 	@Column(length = 30, unique = true) 
 	private String email;
-	@Column(length = 20, nullable = false) 
+	@Column(length = 20)//, nullable = false) 
 	private String password;
-	@Column(nullable = false) 
+	@Column(/*nullable = false*/) 
 	private Gender gender;
-	@Column(length = 20, nullable = false) 
+	@Column(length = 20)//, nullable = false) 
     private double sscMarks ; 
-	@Column(length = 20, nullable = false) 
+	@Column(length = 20)//, nullable = false) 
     private double hscMarks ; 
-	@Column(length = 20, nullable = false) 
+	@Column(length = 20)//, nullable = false) 
     private double degreeMarks ; 
 	@Column(name = "graduation", length = 30) 
 	private String graduation ; // need ENUM for validation 
-	@Column(length = 20, nullable = false) 
+	@Column(length = 20)//, nullable = false) 
 	private String branch ;
-	@Column(length = 20, nullable = false) 
+	@Column(length = 20)//, nullable = false) 
     private double experience ;
-	@Column(length = 10, nullable = false ) 
+	@Column(length = 10)//, nullable = false ) 
 	@Range(max = 10 , min = 10)
     private long contact;
 	@JsonIgnore

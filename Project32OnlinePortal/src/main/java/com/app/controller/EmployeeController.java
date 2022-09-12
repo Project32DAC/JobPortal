@@ -31,30 +31,35 @@ public class EmployeeController {
 	public ResponseEntity<?> employeeEdit(@PathVariable int id) {
 		System.out.println("in get all users");
 		
-		return  ResponseEntity.ok(userService.getAllUsers());//u can send object wrap in response entity //or with status code or see readme
+		
+		
+		
+		
+		
+		return  ResponseEntity.ok("True");//u can send object wrap in response entity //or with status code or see readme
 	}
 
-	// add REST end point for user login
-	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@RequestBody @Valid UserLoginRequest request) {
-		System.out.println("in user login " + request);
-		return ResponseEntity.ok(userService.login(request));
-	}
-
-	// delete user by id , by last name , by role name
-	@DeleteMapping("/{userId}")
-	public String deleteUserDetails(@PathVariable long userId) {
-		System.out.println("in del user " + userId);
-		return userService.deleteUserDetails(userId);
-	}
-
-	// add REST end point for user registration
-	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser(@RequestBody @Valid UserSignupRequest request) {
-		System.out.println("in reg user " + request);
-		// return null;
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerNewUser(request));
-	}
+//	// add REST end point for user login
+//	@PostMapping("/signin")
+//	public ResponseEntity<?> authenticateUser(@RequestBody @Valid UserLoginRequest request) {
+//		System.out.println("in user login " + request);
+//		return ResponseEntity.ok(userService.login(request));
+//	}
+//
+//	// delete user by id , by last name , by role name
+//	@DeleteMapping("/{userId}")
+//	public String deleteUserDetails(@PathVariable long userId) {
+//		System.out.println("in del user " + userId);
+//		return userService.deleteUserDetails(userId);
+//	}
+//
+//	// add REST end point for user registration
+//	@PostMapping("/signup")
+//	public ResponseEntity<?> registerUser(@RequestBody @Valid UserSignupRequest request) {
+//		System.out.println("in reg user " + request);
+//		// return null;
+//		return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerNewUser(request));
+//	}
 	
 
 }

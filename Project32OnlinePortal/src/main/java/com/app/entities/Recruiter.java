@@ -52,7 +52,7 @@ public class Recruiter extends BaseEntity {
 	@CollectionTable(name = "recruiter_jobs",joinColumns = @JoinColumn(name="job_id"))
 	@Column(name="jobs",length = 20)
 	
-	@OneToMany(mappedBy = "recruiter",cascade = CascadeType.ALL) 
+	@OneToMany//(mappedBy = "recruiter",cascade = CascadeType.ALL) 
 	private List<Job> jobs=new ArrayList<>();
 	
 	

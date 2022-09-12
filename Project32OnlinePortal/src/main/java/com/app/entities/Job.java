@@ -8,10 +8,9 @@ public class Job extends BaseEntity{
 	private String jobProfile;
 	@Column(name = "vacancies", length = 30) 
 	private int jobVacancy;
-	@Column(name = "experience",length = 20, nullable = false) 
+	@Column(name = "experience",length = 20) 
 	private Double experience;
-	@ManyToOne
-	@JoinColumn(name="recruiter_id")
-	
-    private Recruiter recruiter;
+//	@ManyToOne
+//	@JoinColumn(name="recruiter_id")
+//    private Recruiter recruiter;
 }
