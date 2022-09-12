@@ -32,7 +32,7 @@ public class UserController {
 	}
 
 	// add REST API end point to serve list of users
-	@GetMapping//http://localhost:8080/users in get methog
+	@GetMapping//http://localhost:8080/users in get method
 	public ResponseEntity<?> fetchAllUsers() {
 		System.out.println("in get all users");
 		return  ResponseEntity.ok(userService.getAllUsers());//u can send object wrap in response entity //or with status code or see readme

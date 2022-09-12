@@ -1,8 +1,5 @@
 package com.app.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.validation.constraints.NotBlank;
 
 import com.app.entities.UserRole;
