@@ -27,7 +27,7 @@ public class EmployeeController {
 		System.out.println("in employee edit");
 		
 
-		return  ResponseEntity.ok(empService.editEmployee(id , request));//u can send object wrap in response entity //or with status code or see readme
+		return  ResponseEntity.ok(empService.editEmployee(id,request));//u can send object wrap in response entity //or with status code or see readme
 	}
 
 //	// add REST end point for user login

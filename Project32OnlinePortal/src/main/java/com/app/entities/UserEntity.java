@@ -36,5 +36,8 @@ public class UserEntity extends BaseEntity{
 	//@JsonIgnore
 	@OneToOne
 	private Role userRole ;
+	
+	
+	
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -30,17 +31,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @Getter
-
+@ToString(exclude = "employeeUser")
 public class Employee extends BaseEntity {
   
-	@Column(name = "first_name", length = 20)
-	private String firstName;
-	@Column(name = "last_name", length = 30) 
-	private String lastName;
-	@Column(length = 30, unique = true) 
-	private String email;
-	@Column(length = 20)//, nullable = false) 
-	private String password;
+//	@Column(name = "first_name", length = 20)
+//	private String firstName;
+//	@Column(name = "last_name", length = 30) 
+//	private String lastName;
+//	@Column(length = 30, unique = true) 
+//	private String email;
+//	@Column(length = 20)//, nullable = false) 
+//	private String password;
 	@Column(/*nullable = false*/) 
 	private Gender gender;
 	@Column(length = 20)//, nullable = false) 
@@ -63,6 +64,13 @@ public class Employee extends BaseEntity {
 	@CollectionTable(name = "employee_skills",joinColumns = @JoinColumn(name="employee_id"))
 	@Column(name="skills",length = 20)
 	private List<String> skills=new ArrayList<>();
+	
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "employeeUser_id", nullable = false)
+	@MapsId
+	private UserEntity employeeUser;
+	
 	
 	
 }

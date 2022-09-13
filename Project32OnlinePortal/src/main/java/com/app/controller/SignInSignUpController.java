@@ -46,17 +46,17 @@ public class SignInSignUpController {
 				request.getPassword());
 		log.info("auth token " + authToken);
 		try {
-			System.out.println("***********************************************************");
+			
 			// authenticate the credentials
 			Authentication authenticatedDetails = manager.authenticate(authToken);
 			log.info("auth token again " + authenticatedDetails);
 			
-			System.out.println("***********"+authenticatedDetails+"**************");
+			
 			// => auth succcess
 			return ResponseEntity.ok(new AuthResp("Auth successful!", utils.generateJwtToken(authenticatedDetails)));
 		} catch (BadCredentialsException e) { // lab work : replace this by a method in global exc handler
 			// send back err resp code
-			System.out.println("err**************** "+e.getMessage()+e.toString());
+			System.out.println(e.getMessage()+e.toString());
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
 		}
 

@@ -15,7 +15,7 @@ import com.app.dto.EmployeeEditResponse;
 public class EmployeeServiceImpl implements IEmployeeService{
 
 	@Override
-	public EmployeeEditResponse editEmployee(int id , EmployeeEditRequest req) {
+	public EmployeeEditResponse editEmployee(int id,EmployeeEditRequest req) {
 		// TODO Auto-generated method stub 
 		String jpql = "update employee e set e.gender= :gen"+ " e.sscMarks= :ssc" + " e.hscMarks= :hsc"+
 		" e.degreeMarks= :degreeM"+" e.branch= :br"+ " e.experience= :exp"+  " e.contact= :cn"+ " e.skills= :sk"; 

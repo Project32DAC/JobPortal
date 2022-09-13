@@ -31,15 +31,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @Getter
-
+@ToString(exclude = "recruiterUser")
 public class Recruiter extends BaseEntity {
    
-	@Column(name = "first_name", length = 20)
-	private String firstName;
-	@Column(name = "last_name", length = 30) 
-	private String lastName;
-	@Column(length = 20, nullable = false) 
-	private String password;
+//	@Column(name = "first_name", length = 20)
+//	private String firstName;
+//	@Column(name = "last_name", length = 30) 
+//	private String lastName;
+//	@Column(length = 20, nullable = false) 
+//	private String password;
 	@Column(length = 50, unique = true) 
 	private String companyName;
 	@Column(length = 100) 
@@ -54,6 +54,11 @@ public class Recruiter extends BaseEntity {
 	
 	@OneToMany//(mappedBy = "recruiter",cascade = CascadeType.ALL) 
 	private List<Job> jobs=new ArrayList<>();
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "recruiterUser_id", nullable = false)
+	@MapsId
+	private UserEntity recruiterUser;
 	
 	
 }
