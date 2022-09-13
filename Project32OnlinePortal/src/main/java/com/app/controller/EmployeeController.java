@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.EmployeeEditRequest;
+import com.app.entities.Employee;
 import com.app.service.IEmployeeService;
 
 @RestController // @Controller + @ResponseBody //i.e to pass respone in json so it is deserializon: added on ret types of req handling methods
@@ -23,7 +24,7 @@ public class EmployeeController {
 
 	// add REST API end point to serve list of users
 	@PostMapping("/edit/{id}")
-	public ResponseEntity<?> employeeEdit(@PathVariable int id , @RequestBody @Valid EmployeeEditRequest request) {
+	public ResponseEntity<?> employeeEdit(@PathVariable int id , @RequestBody @Valid Employee request) {
 		System.out.println("in employee edit");
 		
 

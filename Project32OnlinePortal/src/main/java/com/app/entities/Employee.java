@@ -67,7 +67,7 @@ public class Employee extends BaseEntity {
 	
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "employeeUser_id", nullable = false)
+	@JoinColumn(name = "employeeUser_id" /*nullable = false*/)
 	@MapsId
 	private UserEntity employeeUser;
 	
