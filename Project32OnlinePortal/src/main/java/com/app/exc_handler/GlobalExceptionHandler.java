@@ -13,37 +13,26 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.ApiResponse;
 
-@ControllerAdvice // Mandatory cls level annotation to tell SC : following is global exc handler
-					// (a spring bean)
-					// class --to advise all controllers (RestController) , regarding exc handling
+@ControllerAdvice // MANDATORY annotation to tell SC , following is the global exc handler class
+					// to intercept exceptions in all controllers n rest controllers
+//ResponseEntityExceptionHandler => a base class , for handling methdo arg not valid type of excs
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-
-	// exc handling methods.
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		System.out.println("in handle method arg not valid !!!!!!!!!!!!!!!!!!");
-		Map<String, String> collect = ex.getBindingResult().getFieldErrors().stream() // Stream<FieldError>
-				.collect(Collectors.toMap(f -> f.getField(), FieldError::getDefaultMessage));
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(collect);
+		System.out.println("in global handler : method arg invalid");
+		Map<String, String> errorMap = ex.getFieldErrors().stream() // Stream<FieldError>
+				.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMap);
 	}
 
-	// how to tell SC , that followin g is exc handling method
-	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException e) {
-		System.out.println("in handle res not found...");
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage()));
-	}
-	//for all remaining excs : add global exc handling method
-	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<?> handleRuntimeException(RuntimeException e) {
-		System.out.println("in handle run time exc");
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<?> handleException(Exception e) {
+		System.out.println("in run time exc handler");
+		e.printStackTrace();
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse(e.getMessage()));
 	}
-	
-
 }

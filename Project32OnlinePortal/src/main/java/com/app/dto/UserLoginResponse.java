@@ -1,8 +1,6 @@
 package com.app.dto;
 
 
-import com.app.entities.UserRole;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

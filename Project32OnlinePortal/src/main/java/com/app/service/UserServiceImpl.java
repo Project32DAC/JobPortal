@@ -2,51 +2,65 @@ package com.app.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
-import com.app.dao.AddressRepository;
-
-import com.app.dao.RoleRepository;
-
-import com.app.dao.UserRepository;
-import com.app.dto.ApiResponse;
+import com.app.dto.UserDTO;
 import com.app.dto.UserLoginRequest;
 import com.app.dto.UserLoginResponse;
-import com.app.dto.UserSignupRequest;
-import com.app.entities.User;
+import com.app.dto.UserRegResponse;
 
-import lombok.extern.slf4j.Slf4j;
+import com.app.entities.UserEntity;
+import com.app.repository.RoleRepository;
+import com.app.repository.UserRepository;
 
 @Service
 @Transactional
-@Slf4j
 public class UserServiceImpl implements IUserService {
-	// dep : dao i/f
+	// dep : user repo n role repo
 	@Autowired
 	private UserRepository userRepo;
-	@Autowired
-	private AddressRepository addressRepo;
 
 	@Autowired
 	private RoleRepository roleRepo;
-	
-	// auto wire model mapper dependency
+
+	// mapper
 	@Autowired
-	private ModelMapper mapper;// field name NEED NOT match bean method name!
+	private ModelMapper mapper;
+	// password enc
+	@Autowired
+	private PasswordEncoder encoder;
 
 	@Override
-	public List<User> getAllUsers() {
+	public UserRegResponse registerUser(UserDTO user) {
+		// Objective : 1 rec inserted in users table n insert n recs in link table
+		// user_roles
+		// 1. Map dto --> entity
+		UserEntity userEntity = mapper.map(user, UserEntity.class);
+		// 2. Map Set<UserRole : enum> ---> Set<Role :entity> n assign it to the
+		// transient user entity
+		userEntity.setUserRole(roleRepo.findByRoleName(user.getRole()));
+		// 3. encode pwd
+		userEntity.setPassword(encoder.encode(user.getPassword()));
+		// 4 : Save user details
+		UserEntity persistentUser = userRepo.save(userEntity);
+		return new UserRegResponse("User registered successfully with ID " + persistentUser.getId());
+	}
+
+	@Override
+	public List<UserEntity> getAllUsers() {
 		// TODO Auto-generated method stub
-		return userRepo.findAll();//inherited method
+		return  userRepo.findAll();
 	}
 
 	@Override
 	public UserLoginResponse login(UserLoginRequest request) {
-		User user = userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword())
+		UserEntity user = userRepo.findByEmailAndPassword(request.getEmail(), request.getPassword())
 				.orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!!!"));
 		// => valid login
 		// user : PERSISTENT
@@ -62,29 +76,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public String deleteUserDetails(long userId) {
-		// child rec addr//child also need to dlete
-		
-		
-		
-
 		userRepo.deleteById(userId);
 		return "deleted user details with id" + userId;
+		
 	}
-
-	@Override
-	public ApiResponse registerNewUser(UserSignupRequest userDto) {
-		// map user signup dto --> user entity for persistence (model mapper will retain
-		// default values for the fields which are not matching between dto n entity)
-		//source=userdto parameter & destination=User.class
-		User transientUser = mapper.map(userDto, User.class);
-		log.info("user dto {} transient user {} ", userDto, transientUser);//same like sop
-		transientUser.setRole(userDto.getUserRole());//returning set of roles
-		log.info("roles {}",transientUser.getRole());
-		User persistentUser = userRepo.save(transientUser);
-		System.out.println("created id");
-		return new ApiResponse("User registered with ID " + persistentUser.getId() + " successfully!");
-	}
-
-	
 
 }

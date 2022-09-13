@@ -1,7 +1,6 @@
 package com.app.service;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.transaction.Transactional;
 
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.dto.EmployeeEditRequest;
 import com.app.dto.EmployeeEditResponse;
-import com.app.entities.Gender;
+
 
 @Service
 @Transactional
