@@ -74,11 +74,7 @@ public class Employee extends BaseEntity {
 	
 	// CONSTRAINT `FK1d3x9av74ouh3lp4hnq9etnor` FOREIGN KEY (`employee_user_id`) REFERENCES `users` (`id`))
 	
-<<<<<<< HEAD
 	@OneToOne(cascade=CascadeType.ALL)
-=======
-	@OneToOne(cascade = CascadeType.ALL)
->>>>>>> f016b139149d13823ccbdbb40c2c51e95044e0dc
 	@JoinColumn(name = "employeeUser_id" /*nullable = false*/)
 	@MapsId
 	private UserEntity employeeUser;

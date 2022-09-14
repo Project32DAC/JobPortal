@@ -48,28 +48,27 @@ public class RecruiterServiceImpl implements IRecruiterService{
 		//ArrayList <Job> jList = mapper.map(req.getJobs(), Job.class);
 		System.out.println("**********00000"+req.getJobs());
 		
-		transientRecru.setRecruiterUser(user);
-		recruRepo.save(transientRecru);
+		
+		
+
+		transientRecru.setRecruiterUser(user); 
+		transientRecru.setJobs(req.getJobs());
+		
+		
+		
 		//jobRepo.saveAll(req.getJobs());
-		
-		
 		for(Job j:req.getJobs()){
 			
 		Job jb=mapper.map(j,Job.class);
-		System.out.println("**********11111111111"+jb);
+		System.out.println("**********11111111111"+jb); 
+		  jb.setRecruiter1(transientRecru);
 			jobRepo.save(jb);
 		}
-		
+		recruRepo.save(transientRecru);
 		System.out.println("*******OurUser"+transientRecru);
 		
-		
-		
-		
+				
 		//transientRecru.setJobs(req.getJobs());
-		
-		
-		
-		
 		
 		return new ApiResponse(user.getFirstName()+" you have succesfully edited the details");
 		

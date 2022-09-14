@@ -24,11 +24,7 @@ public class EmployeeController {
 
 	// add REST API end point to serve list of users
 	@PostMapping("/edit/{id}")
-<<<<<<< HEAD
 	public ResponseEntity<?> employeeEdit(@PathVariable long id , @RequestBody @Valid EmployeeEditRequest request) {
-=======
-	public ResponseEntity<?> employeeEdit(@PathVariable int id , @RequestBody @Valid Employee request) {
->>>>>>> f016b139149d13823ccbdbb40c2c51e95044e0dc
 		System.out.println("in employee edit");
 		
 
