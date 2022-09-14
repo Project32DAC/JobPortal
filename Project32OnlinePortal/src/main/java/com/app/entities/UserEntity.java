@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -11,6 +12,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,7 +27,8 @@ import lombok.ToString;
 @Table(name = "users")
 @Getter
 @Setter
-@ToString(exclude ="userRole")
+@ToString(exclude ={"userRole","emp","recruiter"})
+@OnDelete(action=OnDeleteAction.CASCADE)
 public class UserEntity extends BaseEntity{
 	
 	@Column(length = 20)
@@ -34,9 +40,13 @@ public class UserEntity extends BaseEntity{
 	@Column(length = 350)
 	private String password;
 	//@JsonIgnore
-	@OneToOne
+	@OneToOne//@JoinColumn(nullable = false)
 	private Role userRole ;
 	
+	@OneToOne(mappedBy = "employeeUser",cascade=CascadeType.ALL)
+	private Employee emp;
+	@OneToOne(mappedBy = "recruiterUser",cascade=CascadeType.ALL)
+	private Recruiter recruiter;
 	
 	
 

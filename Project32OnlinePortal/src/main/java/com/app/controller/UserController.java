@@ -46,7 +46,7 @@ public class UserController {
 //	}
 
 	// delete user by id , by last name , by role name
-	@DeleteMapping("/{userId}")
+	@DeleteMapping("/delete/{userId}")
 	public String deleteUserDetails(@PathVariable long userId) {
 		System.out.println("in del user " + userId);
 		return userService.deleteUserDetails(userId);
