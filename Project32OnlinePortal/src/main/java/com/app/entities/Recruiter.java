@@ -8,7 +8,10 @@ import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import com.app.entities.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
@@ -56,11 +59,11 @@ public class Recruiter extends BaseEntity {
 //	@ElementCollection //to indicate collection of basic value types
 //	@CollectionTable(name = "recruiter_jobs",joinColumns = @JoinColumn(name="recruiter_id"))
    
-	@OneToMany(mappedBy="recruiter1",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="recruiter1",cascade = CascadeType.ALL /*, fetch = FetchType.EAGER*/)
 	private List<Job> jobs=new ArrayList<>();//*****************************************
 	
-	
-	@OneToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL )
 	@JoinColumn(name = "recruiterUser_id"/*, nullable = false*/)
 	@MapsId
 	private UserEntity recruiterUser;

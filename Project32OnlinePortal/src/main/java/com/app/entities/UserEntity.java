@@ -43,6 +43,7 @@ public class UserEntity extends BaseEntity{
 	@OneToOne//@JoinColumn(nullable = false)
 	private Role userRole ;
 	
+	@JsonIgnore////////////////////////////////////**************************chechkthis
 	@OneToOne(mappedBy = "employeeUser",cascade=CascadeType.ALL)
 	private Employee emp;
 	@OneToOne(mappedBy = "recruiterUser",cascade=CascadeType.ALL)

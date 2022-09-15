@@ -32,5 +32,31 @@ public class RecruiterController {
 		
 
 		return  ResponseEntity.ok(recService.editRecruiter(id,request));//u can send object wrap in response entity //or with status code or see readme
+	} 
+	
+	
+	@PreAuthorize("hasRole('ROLE_RECRUITER')")
+	@PostMapping("/viewjobapplications/{jobId}")
+	public ResponseEntity<?> viewJobApplications(@PathVariable long jobId){
+		
+		
+		return  ResponseEntity.ok(recService.viewJobApplications(jobId));
+		
 	}
+	
+	
+	@PreAuthorize("hasRole('ROLE_RECRUITER')")
+	@PostMapping("/viewJobs/{recruId}")//1st show this on ui after that map that job with emplyeee using /viewjobapplications/{jobId}"
+	public ResponseEntity<?> viewAllJobs(@PathVariable long recruId){ 
+		
+		
+		return  ResponseEntity.ok(recService.viewAllJobs(recruId));
+		
+	}
+	
+	
+	
+	
+	
+	
 }

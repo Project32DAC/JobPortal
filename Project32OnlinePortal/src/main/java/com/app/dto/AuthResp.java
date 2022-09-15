@@ -1,5 +1,9 @@
 package com.app.dto;
 
+import java.util.Optional;
+
+import com.app.entities.UserEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthResp {
-	private String message;
+	private String message; 
+	private Optional<UserEntity> user ;
 	private String jwt;
 }

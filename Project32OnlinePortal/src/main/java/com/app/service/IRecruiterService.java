@@ -9,4 +9,28 @@ public interface IRecruiterService {
 
 	public ApiResponse editRecruiter(long id, @Valid RecruiterEditRequest request);
 
+	
+
+	
+
+
+
+	public Object viewJobApplications(long jobId);
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+	Object viewAllJobs(long recruId);
+
 }

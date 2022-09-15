@@ -11,7 +11,10 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -35,7 +38,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString(exclude = {"employeeUser","skills"})
+@ToString(exclude = {"employeeUser","skills","jobs"})
 
 public class Employee extends BaseEntity {
   
@@ -67,17 +70,24 @@ public class Employee extends BaseEntity {
 	@Range(min = 10)
     private long contact;
 	@JsonIgnore
-	@ElementCollection //to indicate collection of basic value types
+	@ElementCollection(fetch = FetchType.EAGER) //to indicate collection of basic value types
 	@CollectionTable(name = "employee_skills",joinColumns = @JoinColumn(name="employee_id"))
 	@Column(name="skills",length = 20)
 	private List<String> skills=new ArrayList<>();
 	
-	// CONSTRAINT `FK1d3x9av74ouh3lp4hnq9etnor` FOREIGN KEY (`employee_user_id`) REFERENCES `users` (`id`))
 	
+	//@JsonIgnore///////////////////////////*****************************************for /recruiter/view/  and added in userEntity
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "employeeUser_id" /*nullable = false*/)
 	@MapsId
 	private UserEntity employeeUser;
+	
+	@JsonIgnore//check employee edit request//check for front end
+	@ManyToMany(cascade = CascadeType.ALL /*, fetch = FetchType.EAGER*/)
+	@JoinTable(name = "Emp_jobs", joinColumns = @JoinColumn(name = "emp_id"), inverseJoinColumns = @JoinColumn(name = "job_id"))
+	private List<Job> jobs=new ArrayList<>();
+	
+	
 	
 	
 	

@@ -3,7 +3,9 @@ package com.app.service;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -13,12 +15,15 @@ import org.springframework.stereotype.Service;
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.ApiResponse;
 import com.app.dto.RecruiterEditRequest;
+import com.app.entities.Employee;
 import com.app.entities.Job;
 import com.app.entities.Recruiter;
 import com.app.entities.UserEntity;
 import com.app.repository.JobRepository;
 import com.app.repository.RecruiterRepository;
 import com.app.repository.UserRepository;
+
+
 
 
 @Service
@@ -31,7 +36,8 @@ public class RecruiterServiceImpl implements IRecruiterService{
 	@Autowired
 	RecruiterRepository recruRepo ;
 	
-
+	@Autowired
+	EntityManager em ;
 	@Autowired
 	JobRepository jobRepo ;
 	
@@ -73,6 +79,35 @@ public class RecruiterServiceImpl implements IRecruiterService{
 		return new ApiResponse(user.getFirstName()+" you have succesfully edited the details");
 		
 		
+	}
+
+
+
+	@Override
+	public Object viewJobApplications(long jobId) {
+		List<Employee> empList;
+		
+		
+		
+			String jpql="select e from Employee e join fetch e.jobs j where j.id= :jobId ";
+			
+			empList= em.createQuery(jpql,Employee.class).setParameter("jobId", jobId).getResultList() ;
+			
+		return empList;
+	}
+
+
+
+	@Override
+	public Object viewAllJobs(long recruId) {
+		System.out.println("In view *********all ********job");
+		List<Job> jobList;
+		Recruiter rec=recruRepo.findById(recruId).orElseThrow(()->new ResourceNotFoundException("Invalid Recruiter Id"));
+		System.out.println("........................"+rec);		
+		jobList =rec.getJobs();
+		
+		System.out.println(jobList);
+		return jobList;
 	}
 
 	

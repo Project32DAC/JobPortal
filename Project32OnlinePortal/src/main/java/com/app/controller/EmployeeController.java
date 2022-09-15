@@ -1,9 +1,14 @@
 package com.app.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.EmployeeEditRequest;
-import com.app.entities.Employee;
+
+import com.app.entities.Recruiter;
 import com.app.service.IEmployeeService;
 
 @RestController // @Controller + @ResponseBody //i.e to pass respone in json so it is deserializon: added on ret types of req handling methods
@@ -30,6 +36,34 @@ public class EmployeeController {
 
 		return  ResponseEntity.ok(empService.editEmployee(id,request));//u can send object wrap in response entity //or with status code or see readme
 	}
+	
+	
+	@PostMapping("/generateresume/{id}")
+	public ResponseEntity<?> generateResume(@PathVariable long id) {
+		System.out.println("in generate resume");
+		return ResponseEntity.status(HttpStatus.CREATED).body(empService.generateResume(id));
+	}
+	
+	@PreAuthorize("hasRole('ROLE_EMPLOYEE')")
+	@PostMapping("/search/{jobProfile}")
+	public ResponseEntity<?> searchJobs(@PathVariable String jobProfile) {
+		System.out.println("in recruiter search");
+//		
+//        List<Recruiter> o = empService.searchJobByProfile(jobProfile) ; 
+//        System.out.println(o);
+        
+		return  ResponseEntity.ok(empService.searchJobByProfile(jobProfile));//u can send object wrap in response entity //or with status code or see readme
+	}
+	
+	@PreAuthorize("hasRole('ROLE_EMPLOYEE')")
+	@PostMapping("/apply/{jId}/{eId}")
+	public ResponseEntity<?> applyJob(@PathVariable int jId,@PathVariable int eId) {
+
+		return ResponseEntity.ok(empService.applyJob(jId, eId));
+
+	}
+	
+	
 
 //	// add REST end point for user login
 //	@PostMapping("/signin")

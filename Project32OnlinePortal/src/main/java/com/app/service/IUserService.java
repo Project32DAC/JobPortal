@@ -3,6 +3,7 @@ package com.app.service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -20,5 +21,8 @@ public interface IUserService {
 	
 	String deleteUserDetails(long userId);
 	UserRegResponse registerUser(UserDTO user);
+
+	Optional<UserEntity> findByEmail(String email); 
+	
 
 }

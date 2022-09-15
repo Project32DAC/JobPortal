@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -78,6 +79,14 @@ public class UserServiceImpl implements IUserService {
 	public String deleteUserDetails(long userId) {
 		userRepo.deleteById(userId);
 		return "deleted user details with id" + userId;
+		
+	} 
+	
+	@Override
+	public Optional<UserEntity> findByEmail(String email) {
+		Optional<UserEntity> user = userRepo.findByEmail(email) ; 
+		
+		return user ;
 		
 	}
 
