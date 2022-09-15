@@ -1,0 +1,35 @@
+
+.signinleftside {
+    background-image: linear-gradient(to bottom right, #ff325e, #0ee7ff);
+    padding-top: 3rem;
+    text-align: center;
+    color: aliceblue;
+    text-shadow: 3px 3px 7px black;
+
+}
+
+.signinrightside {
+    background-image: linear-gradient(to bottom left, #ff325e,  #0ee7ff)
+}
+
+
+
+.col- {
+    height: 100%;
+}
+
+img.sign1 {
+    height: 350px;
+    margin-top: 4rem;
+    margin-left: 1rem;
+
+}
+
+.container {
+    margin-top: 7rem;
+   
+}
+
+.card {
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6), 0 20px 20px 0 rgba(0, 0, 0, 0.6);
+}

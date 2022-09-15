@@ -1,0 +1,15 @@
+.Navbar {
+    width: 100%;
+    overflow: auto;
+    
+};
+
+.RightNavbar{
+    float: right;    
+    font-size: larger;
+    font-weight: bold; 
+};
+
+
+
+

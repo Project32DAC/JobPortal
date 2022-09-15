@@ -1,0 +1,31 @@
+
+
+.loginleftside {
+    background-image: linear-gradient(to bottom right,#D148F7, #19C3D5)   ;
+        padding-top: 3rem;
+            text-align: center;
+            color: aliceblue;
+            text-shadow: 3px 3px 7px black;
+        
+}
+.loginrightside {
+    background-image: linear-gradient(to bottom left, #D148F7, #19C3D5)
+}
+.col-5 {
+        height: 99vh;
+}
+
+img.loginimg{
+  height: 350px;
+margin-top: 4rem;
+margin-left: 1rem;
+
+}
+
+.container{
+   margin-top: 7rem;
+}
+
+.card{
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6),  0 20px 20px 0 rgba(0, 0, 0, 0.6);
+}
