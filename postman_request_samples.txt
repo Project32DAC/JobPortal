@@ -1,14 +1,15 @@
 =========> SIGNUP 
 
-{    "firstName":"Omkar",
-	 "lastName":"Gaikwad",
-	 "email":"omkargaikwad@gmail.com",
-	 "password":"1234",
-     "userRole":"RECRUITER"
+{    
+     "firstName":"Omkar",
+     "lastName":"Gaikwad",
+     "email":"omkar@gmail.com",
+     "password":"1234",
+     "userRole":"ROLE_RECRUITER"
 }
 
 =============> EMP_DETAILS
-	
+{	
 "gender" : "MALE" ,
 "sscMarks": 80.5 ,
 "hscMarks" : 80.2 ,
@@ -17,24 +18,24 @@
 "branch" : "Mechanical" ,
 "experience" : 1.5 ,
 "contact" : 7057363511 ,
-"skills" : ["a", "b"] ,
-"employeeUser_id": 1
-
+"skills" : ["a", "b"] 
+}
 =============> RECRUITER_DETAILS 
 
-{ "companyName":"cdacpune", 
+{ 
+"companyName":"cdacpune", 
 "companyAddress":"ITpark pune", 
 "companyContact":10, 
 "jobs":[ 
-{
+   {
    "jobProfile":"Backend Developer ", 
    "jobVacancy":10 , 
    "experience":1.5
- },
- {
- "jobProfile":"Backend Developer ",
- "jobVacancy":10 ,
- "experience":1.5
- } 
+    },
+   {
+   "jobProfile":"Backend Developer ",
+    "jobVacancy":10 ,
+    "experience":1.5
+    } 
 ]
 }
