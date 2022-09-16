@@ -39,3 +39,9 @@
     } 
 ]
 }
+=============> Chnage Employee 
+
+{ 
+ "experience":1.5 , 
+ "skills" : ["a", "b" , "c" , "D"]
+}
