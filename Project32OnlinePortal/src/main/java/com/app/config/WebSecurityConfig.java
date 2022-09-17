@@ -44,7 +44,7 @@ public class WebSecurityConfig {
 		authorizeRequests()
 		.antMatchers("/user/**").hasRole("ADMIN")
 		.antMatchers("/employee/edit/**","/employee/search/**").hasRole("EMPLOYEE")
-		.antMatchers("/recruiter/edit/**").hasRole("RECRUITER")
+		.antMatchers("/recruiter/edit/**","/deletejobs/**").hasRole("RECRUITER")
 		.antMatchers( "/auth/**", "/generateresume/**","/swagger*/**", "/v*/api-docs/**").permitAll() // enabling global
 																										// access to all
 																										// urls with

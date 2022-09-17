@@ -1,5 +1,6 @@
 package com.app.entities;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.*;
@@ -23,6 +24,11 @@ public class Job extends BaseEntity{
 	private int jobVacancy;
 	@Column(name = "experience",length = 20) 
 	private Double experience;
+	@Column(name="pub_date")
+	private LocalDate publishDate;	
+	@Column(name = "job_description",length = 400)
+	private String jobDescription;;
+	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Recru_id")

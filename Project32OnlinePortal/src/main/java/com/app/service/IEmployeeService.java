@@ -5,6 +5,7 @@ package com.app.service;
 import java.util.List;
 
 import com.app.dto.ApiResponse;
+import com.app.dto.ChangeEmpRequestDTO;
 import com.app.dto.EmployeeEditRequest;
 
 import com.app.dto.ResumeResponseDTO;
@@ -18,5 +19,8 @@ public interface IEmployeeService {
 	public List<Recruiter> searchJobByProfile(String jobProfile);
 	
 	public Object applyJob(long jobId, long empId);
+	
+	String changeEmployeeDetails(long userId, ChangeEmpRequestDTO req);
+	
 
 }

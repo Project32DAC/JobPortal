@@ -20,9 +20,12 @@ public interface IUserService {
 	UserLoginResponse login(UserLoginRequest request);
 	
 	String deleteUserDetails(long userId);
+	
 	UserRegResponse registerUser(UserDTO user);
 
-	Optional<UserEntity> findByEmail(String email); 
+	Optional<UserEntity> findByEmail(String email);
+
+	
 	
 
 }

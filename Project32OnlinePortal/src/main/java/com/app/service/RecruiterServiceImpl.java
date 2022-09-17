@@ -2,14 +2,16 @@ package com.app.service;
 
 
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
@@ -19,6 +21,7 @@ import com.app.entities.Employee;
 import com.app.entities.Job;
 import com.app.entities.Recruiter;
 import com.app.entities.UserEntity;
+import com.app.repository.EmployeeRepository;
 import com.app.repository.JobRepository;
 import com.app.repository.RecruiterRepository;
 import com.app.repository.UserRepository;
@@ -40,6 +43,13 @@ public class RecruiterServiceImpl implements IRecruiterService{
 	EntityManager em ;
 	@Autowired
 	JobRepository jobRepo ;
+	
+	
+	@Autowired
+	EmployeeRepository empRepo; 
+	
+	@Autowired
+	private EmailSenderService eService;
 	
 	
     
@@ -84,7 +94,7 @@ public class RecruiterServiceImpl implements IRecruiterService{
 
 
 	@Override
-	public Object viewJobApplications(long jobId) {
+	public Object viewJobApplications(long jobId) {//in front of this select button to send mail to candidate ,calling for interview
 		List<Employee> empList;
 		
 		
@@ -108,6 +118,79 @@ public class RecruiterServiceImpl implements IRecruiterService{
 		
 		System.out.println(jobList);
 		return jobList;
+	}
+
+	@Override
+	public String addNewJobs(long recruId, List<Job> jobList) {
+		if(recruRepo.existsById(recruId)) {
+		Recruiter recruiter = recruRepo.
+				 findById(recruId).orElseThrow(()->new ResourceNotFoundException("Invalid Recruiter Id"));
+		
+		//UserEntity user=userRepo.findById(recruId).orElseThrow(()->new ResourceNotFoundException("Invalid Recruiter Id"));
+		
+		for(Job j:jobList){
+			
+			Job jb=mapper.map(j,Job.class);
+			System.out.println("**********11111111111"+jb); 
+			  jb.setRecruiter1(recruiter);
+				//jobRepo.save(jb);
+				recruiter.getJobs().addAll(jobList); 
+		}
+		
+		//recruiter.setRecruiterUser(user);
+		
+	//	recruiter.getJobs().addAll(jobList); 
+		   return "Successfully added new jobs...with Recruiter id :"+recruId ;
+		}
+		return "failed........to add jobs";
+		
+	}
+
+
+
+	@Override
+	public String deleteJobById(long jobId) {
+		if(jobRepo.existsById(jobId)) {
+			jobRepo.deleteById(jobId); 
+			return "Job Deleted Succesfully with job ID :"+ jobId;
+		}
+		return "Failed to delete NO matching job id";
+	}
+
+
+
+	@Override
+	public String callCandidate(long empId) {
+		
+		Employee em=empRepo.findById(empId).orElseThrow(()->new ResourceNotFoundException("Invalid Employee Id"));
+		String CandidateName=em.getEmployeeUser().getFirstName()+"  "+em.getEmployeeUser().getLastName();
+		String emailDetails=em.getEmployeeUser().getEmail();
+		
+		
+		eService.sendSimpleEmail(/*emailDetails*/"sourabhpatil8282@gmail.com",
+				 "Dear"+" " +CandidateName+","+"\r\n"
+						 +"\r\n"
+						 +"\r\n"
+						 +"\r\n"
+						 +"\r\n"
+						 +"\r\n"
+						 +"\r\n"+
+						 
+
+  "This is a response to your job application for the profile of [Job role] where in you"
++ "expressed interest in employment with [Company Name].\r\n"
++ "After going through your application, we have found you suitable for this job and therefore, we have arranged for a face-to-face interview.\r\n"
++ "We would like you to invite for an interview with us which is scheduled on [Interview date] at [Time] at the [Venue].\r\n"
++ "You are requested to reach the venue 30 minutes prior for some paperwork.\r\n"
++"\r\n"
++"\r\n"
++"\r\n"+
+
+"Best Regards,\r\n"
+				+ "Online Job Portal Project 32Team from Acts Pune" , "Congrats!!!You are shortlisted for interview round");
+		
+		
+		return "Mail successfully send to candidate regarding interview call";
 	}
 
 	

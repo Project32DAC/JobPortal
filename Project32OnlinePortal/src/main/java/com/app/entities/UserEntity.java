@@ -31,11 +31,11 @@ import lombok.ToString;
 @OnDelete(action=OnDeleteAction.CASCADE)
 public class UserEntity extends BaseEntity{
 	
-	@Column(length = 20)
+	@Column(length = 30)
 	private String firstName;
-	@Column(length = 20)
+	@Column(length = 30)
 	private String lastName;
-	@Column(length = 50, unique = true)
+	@Column(length = 100, unique = true)
 	private String email;
 	@Column(length = 350)
 	private String password;
@@ -46,6 +46,7 @@ public class UserEntity extends BaseEntity{
 	@JsonIgnore////////////////////////////////////**************************chechkthis
 	@OneToOne(mappedBy = "employeeUser",cascade=CascadeType.ALL)
 	private Employee emp;
+	@JsonIgnore//17/9/22
 	@OneToOne(mappedBy = "recruiterUser",cascade=CascadeType.ALL)
 	private Recruiter recruiter;
 	
