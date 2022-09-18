@@ -1,0 +1,46 @@
+
+.Home{
+    font-weight: bold;
+    font-size:50px;
+    color: #28395A;
+}
+
+.leftside{
+    background-image: linear-gradient(#D9B5C8, white);
+}
+.rightside {
+    background-image: linear-gradient(#D9B5C8, white);
+}
+
+img.office7 {
+display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:120vh;
+    height:350px ;
+    
+    
+}
+
+img.banner{
+    display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height:600px
+    
+}
+
+.bottom{
+    padding-top: 2rem;
+    text-align: center;
+    background-color: #010B1D;
+    color: aliceblue;
+    font-size: larger;
+}
+
+img.flag {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+}
