@@ -3,8 +3,10 @@ import { Container,Card,CardHeader,Form,FormGroup,CardBody,Col,Label,Input, Butt
 import Base from "./Base"
 import { signup } from "../services/user-service";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const Signup = () =>
 {
+    const navigate = useNavigate ()
    const[data,setData] =useState({
     firstName:'',
     lastName:'',
@@ -56,15 +58,16 @@ const Signup = () =>
     event.preventDefault()
     console.log(data);
     //data validate
-    if(error.isError){
-        toast.error("form data is invalid,correct all details then submit")
-        return;
-    }
+    // if(error.isError){
+    //     toast.error("form data is invalid,correct all details then submit")
+    //     return;
+    // }
     //call server api for sending data
     signup(data).then((resp)=>{
         console.log(resp)
         console.log("success log");
         toast.success("signup is succesfull!!");
+        navigate("/login")
     }).catch((error)=>{
         console.log(error)
         console.log("error log");

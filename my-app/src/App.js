@@ -21,7 +21,7 @@ import ViewAllJobs from './Component/ViewAllJobs';
 function App() {
   return (
     <BrowserRouter>
-    <ToastContainer></ToastContainer>
+    {/* <ToastContainer></ToastContainer> */}
       <Routes>
          <Route path="/" element={<Home />} /> 
          
@@ -55,7 +55,7 @@ function App() {
         </Route>
         <Route path="/none" element = {<ToBeDeleted/>} />
         <Route path="/resume" element = {<ResumeInfo/>} />
-        <Route path="/addjob" element = {<AddJob/>} />
+        <Route path="/addjobs" element = {<AddJob/>} />
         <Route path="/viewjob" element = {<ViewAllJobs/>} />
         
       </Routes>

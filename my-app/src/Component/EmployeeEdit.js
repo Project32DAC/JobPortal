@@ -178,7 +178,7 @@ const DeleteMyAccount= () =>
         <Container>
         <h1>Employee Page</h1>
         <div>
-            <Button onClick={moveToResume} >view my resume</Button>
+            <Button color="danger" onClick={moveToResume} >view my resume</Button>
             <Button onClick={DeleteMyAccount}>Delete My Account</Button>
         </div>
             

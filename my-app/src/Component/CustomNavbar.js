@@ -59,6 +59,9 @@ const CustomNavbar= () => {
                         <NavItem>
                             <NavLink>{user.email}</NavLink>
                         </NavItem> 
+                        {/* <NavItem>
+                            <NavLink>onClick={}</NavLink>
+                        </NavItem>  */}
                         </>
                         )
                       }

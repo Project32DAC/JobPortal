@@ -57,14 +57,16 @@ export const addJob=(data,recruId)=>
     
 }
 //viewalljob
+//http://localhost:8080/recruiter/viewJobs/20
 export const getAllJobs=(recruId)=>
 {
-    return privateAxios.get(`/recruiter/viewJobs/${recruId}`)
+    return privateAxios.post(`/recruiter/viewJobs/${recruId}`)
     .then((response)=>response.data);
 }
 //deletejob
+//("/deletejobs/{jobId}")
 export const deleteJob=(jobId)=>{
-    return privateAxios.delete('/user/delete'+ '/' + jobId).then(Response=>Response.data)
+    return privateAxios.delete(`/recruiter/deletejobs/${jobId}`).then(Response=>Response.data)
     
 }
 

@@ -3,22 +3,21 @@ import { Container,Card,CardHeader,Form,FormGroup,CardBody,Col,Label,Input, Butt
 import Base from "./Base"
 import { addJob } from "../services/user-service";
 import { toast } from "react-toastify";
+import { getCurrentUserid } from "../auth";
 const AddJob = () =>
 {
    const[data,setData] =useState({
-    job_profile:'',
-    vacancies:'',
+    jobProfile:'',
+    jobVacancy:'',
     experience:'',
-    pub_date:'',
-    job_description:'',
+    publishDate:'',
+    jobDescription:''
 
 
    })
+   const[arr,setArr]=useState([]);
 
-   const[error,setError]=useState({
-    errors:{},
-    isError:false
-   })
+   
 
 //    useEffect(()=>{
 //     console.log(data)
@@ -31,24 +30,30 @@ const AddJob = () =>
     
     console.log("name changed");
     console.log(event.target.value)
+    
 
    }
-//    const prehandleChange=(event,property)=>
-//    {
-//     event.target.value.firstName;
-//     console.log
-//    }
+   const init=()=>
+   {
+    // setArr(oldarr=>[...oldarr,data]);
+    // console.log("my job");
+    // console.log(arr);
+    // arr.push(data)
+    console.log("printing array");
+    console.log(arr);
+   }
 
    //resetting form
    const resetData=()=>{
     setData({
-    job_profile:'',
-    vacancies:'',
-    experience:'',
-    pub_date:'',
-    job_description:'',
-
-    })
+        jobProfile:'',
+        jobVacancy:'',
+        experience:'',
+        publishDate:'',
+        jobDescription:''
+    
+    
+       })
    }
 
    //submit form
@@ -56,26 +61,25 @@ const AddJob = () =>
     event.preventDefault()
     console.log(data);
     //data validate
-    if(error.isError){
-        toast.error("form data is invalid,correct all details then submit")
-        return;
-    }
+    // if(error.isError){
+    //     toast.error("form data is invalid,correct all details then submit")
+    //     return;
+    // }
     //call server api for sending data
-    addJob(data,recruId).then((resp)=>{
+    // init();
+    let arr = [];
+    arr.push(data)
+    init(arr);
+    addJob(arr,getCurrentUserid()).then((resp)=>{
         console.log(resp)
         console.log("success log");
         toast.success("AddJob is succesfull!!");
     }).catch((error)=>{
         console.log(error)
         console.log("error log");
-        toast.error("signup failed");
+        toast.error("add job failed");
         // handling errors 
-        setError(
-            {
-                errors:error,
-                isError:true
-            }
-        )
+        
     })
    }
 
@@ -102,8 +106,8 @@ const AddJob = () =>
                             <Input type="text" 
                             placeholder="Enter here"
                             id="job_profile"
-                            onChange={(e)=>handleChange(e,'job_profile')}
-                            value={data.job_profile}
+                            onChange={(e)=>handleChange(e,'jobProfile')}
+                            value={data.jobProfile}
                             ></Input>
                         </FormGroup>
                         <FormGroup>
@@ -115,8 +119,8 @@ const AddJob = () =>
                                 name="number"
                                 placeholder="Enter Vacancies"
                                 type="number"
-                                onChange={(e)=>handleChange(e,'vacancies')}
-                                value={data.vacancies}
+                                onChange={(e)=>handleChange(e,'jobVacancy')}
+                                value={data.jobVacancy}
                                 />
                          </FormGroup>
 
@@ -143,8 +147,8 @@ const AddJob = () =>
                                 name="date"
                                 placeholder="date placeholder"
                                 type="date"
-                                onChange={(e)=>handleChange(e,'pub_date')}
-                                value={data.pub_date}
+                                onChange={(e)=>handleChange(e,'publishDate')}
+                                value={data.publishDate}
                                 />
                             </FormGroup>
 
@@ -153,8 +157,8 @@ const AddJob = () =>
                             <Input type="text" 
                             placeholder="Enter here"
                             id="lastjob_descriptionName"
-                            onChange={(e)=>handleChange(e,'job_description')}
-                            value={data.job_description}
+                            onChange={(e)=>handleChange(e,'jobDescription')}
+                            value={data.jobDescription}
                             ></Input>
                         </FormGroup>
                         <Container className="text-center">
