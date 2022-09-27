@@ -3,7 +3,9 @@ package com.app.service;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -11,12 +13,13 @@ import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.ApiResponse;
+import com.app.dto.RecruiterEditDtoResponse;
 import com.app.dto.RecruiterEditRequest;
+import com.app.dto.RecruiterFullEditRequest;
 import com.app.entities.Employee;
 import com.app.entities.Job;
 import com.app.entities.Recruiter;
@@ -167,20 +170,18 @@ public class RecruiterServiceImpl implements IRecruiterService{
 		String emailDetails=em.getEmployeeUser().getEmail();
 		
 		
-		eService.sendSimpleEmail(/*emailDetails*/"sourabhpatil8282@gmail.com",
+		eService.sendSimpleEmail(emailDetails,
 				 "Dear"+" " +CandidateName+","+"\r\n"
 						 +"\r\n"
 						 +"\r\n"
-						 +"\r\n"
-						 +"\r\n"
-						 +"\r\n"
+					
 						 +"\r\n"+
 						 
 
-  "This is a response to your job application for the profile of [Job role] where in you"
-+ "expressed interest in employment with [Company Name].\r\n"
+ "This is a response to your job application where in you"
++ "expressed interest in employment with our company.\r\n"
 + "After going through your application, we have found you suitable for this job and therefore, we have arranged for a face-to-face interview.\r\n"
-+ "We would like you to invite for an interview with us which is scheduled on [Interview date] at [Time] at the [Venue].\r\n"
++ "We would like you to invite for an interview with us which is scheduled on next week  at the Pune office.\r\n"
 + "You are requested to reach the venue 30 minutes prior for some paperwork.\r\n"
 +"\r\n"
 +"\r\n"
@@ -191,6 +192,64 @@ public class RecruiterServiceImpl implements IRecruiterService{
 		
 		
 		return "Mail successfully send to candidate regarding interview call";
+	}
+
+//search for employee
+
+	@Override
+	public List<Employee> searchEmployeeBySkillsAndExp(String skill, Double exp) {
+		List<Employee>empList = new ArrayList<Employee>();
+		 
+		List<Long> empIdList=empRepo.findAllEmployeesBySkill(skill.trim());
+		 
+		 System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"+empIdList);
+		 
+		 String jpql = "select e from Employee e where  e.id =:empid";
+		 
+		 
+		 for (Long var:empIdList) {
+
+			 empList.add( em.createQuery(jpql,Employee.class).setParameter("empid", var).getSingleResult());			 
+		 }
+		 System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"+empList);
+	   
+		return empList.stream().filter(e->e.getExperience()>=exp.doubleValue()).collect(Collectors.toList());
+	}
+
+
+
+	@Override
+	public Object recruiterCompleteDetailsEdit(long id, @Valid RecruiterFullEditRequest request) {
+		int updateCount= 0 ;
+		if(recruRepo.existsById(id)) { 
+			String jpql = "UPDATE Recruiter r set "+ " r.companyName= :cname ," + " r.companyAddress= :adrs,"+
+			" r.companyContact= :cc"+" where r.id = :rid "; 
+			UserEntity user = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("wrong user id")) ; 
+			
+			
+			user.setFirstName(request.getFirstName());
+			user.setLastName(request.getLastName()); 
+			
+			userRepo.save(user);
+			
+			 updateCount = em.createQuery(jpql).setParameter("cname", request.getCompanyName()).setParameter("adrs", request.getCompanyAddress()).setParameter("cc", request.getCompanyContact()).setParameter("rid", id).
+	               executeUpdate() ;
+		}
+		return updateCount;
+
+	}
+
+
+
+	@Override
+	public RecruiterEditDtoResponse viewRecruiterDetails(long recId) {
+		
+		Recruiter transientRec =recruRepo.findById(recId).orElseThrow(()->new ResourceNotFoundException("Invalid Recruiter Id"));;
+		UserEntity transientUser=userRepo.findById(recId).orElseThrow(() -> new ResourceNotFoundException("wrong user id")) ; 
+		
+		RecruiterEditDtoResponse resp= new RecruiterEditDtoResponse(transientUser.getFirstName(),transientUser.getLastName(),transientRec.getCompanyName(),transientRec.getCompanyAddress(),transientRec.getCompanyContact());
+	
+		return resp;
 	}
 
 	

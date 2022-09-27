@@ -1,7 +1,7 @@
 package com.app.dto;
 
-import java.util.ArrayList;
-import java.util.List;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,13 +13,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ChangeEmpRequestDTO {
+public class RecruiterFullEditRequest {
+
+	private String firstName;
+
+	private String lastName;
 	
-	private double experience ;
+	private String companyName;
 	
-    
-    private List<String> skills=new ArrayList<>();
+	private String companyAddress;
+
 	
+    private long companyContact;
 	
 	
 }

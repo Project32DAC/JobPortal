@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +28,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin
 @Slf4j
 public class SignInSignUpController {
 //dep : JWT utils : for generating JWT
 	@Autowired
 	private JwtUtils utils;
-	// dep : Auth mgr
+	
 	@Autowired
 	private AuthenticationManager manager;
 	//dep : user service for handling users
@@ -70,8 +72,8 @@ public class SignInSignUpController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> userRegistration(@RequestBody @Valid UserDTO user)
 	{
-		System.out.println("in reg user : user "+user+" roles "+user.getRole());//{....."roles" : [ROLE_USER,...]}
-		//invoke service layer method , for saving : user info + associated roles info
+		System.out.println("in reg user : user "+user+" roles "+user.getRole());
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerUser(user));		
 	}
 }

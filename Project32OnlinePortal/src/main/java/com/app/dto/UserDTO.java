@@ -1,12 +1,7 @@
 package com.app.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -29,8 +24,6 @@ public class UserDTO {
 	private String email;  
 	@NotBlank(message = "password must be supplied")
 	private String password;
-	
-	//@NotEmpty(message = "at least 1 role should be chosen")
 	private UserRole role ;
 
 }

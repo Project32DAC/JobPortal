@@ -1,10 +1,7 @@
 package com.app.entities;
 
 import java.time.LocalDate;
-import java.util.List;
-
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -16,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString(exclude = {"recruiter1","employee1"})
+@ToString(exclude = {"recruiter1"})
 public class Job extends BaseEntity{
 	@Column(name = "job_profile", length = 20)
 	private String jobProfile;
@@ -36,15 +33,7 @@ public class Job extends BaseEntity{
 	@JsonIgnore
     private Recruiter recruiter1; 
 	
-	
-	
-	
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	//@JoinColumn(name = "EmpJob_id")
-//	//@MapsId 
-//	@JsonIgnore
-//    private Employee employee1; 
-	
+
 	
 	public Job(String jobProfile, int jobVacancy, Double experience) {
 		super();

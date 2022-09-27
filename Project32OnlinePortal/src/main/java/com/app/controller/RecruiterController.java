@@ -7,22 +7,25 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.app.dto.ChangeEmpRequestDTO;
 import com.app.dto.RecruiterEditRequest;
+import com.app.dto.RecruiterFullEditRequest;
 import com.app.entities.Job;
+import com.app.repository.EmployeeRepository;
 import com.app.service.IRecruiterService;
 import com.app.service.IUserService;
 
 
 @RestController // @Controller + @ResponseBody //i.e to pass respone in json so it is deserializon: added on ret types of req handling methods
+@CrossOrigin
 @RequestMapping("/recruiter")
 public class RecruiterController {
 	@Autowired
@@ -30,6 +33,9 @@ public class RecruiterController {
 
 	@Autowired
 	private IUserService userService; 
+	
+	@Autowired
+	private EmployeeRepository empRepo;
 	
 	
 
@@ -45,7 +51,7 @@ public class RecruiterController {
 	
 	
 	@PreAuthorize("hasRole('ROLE_RECRUITER')")
-	@PostMapping("/viewjobapplications/{jobId}")
+	@GetMapping("/viewjobapplications/{jobId}")
 	public ResponseEntity<?> viewJobApplications(@PathVariable long jobId){
 		
 		
@@ -55,7 +61,7 @@ public class RecruiterController {
 	
 	
 	@PreAuthorize("hasRole('ROLE_RECRUITER')")
-	@PostMapping("/viewJobs/{recruId}")//1st show this on ui after that map that job with emplyeee using /viewjobapplications/{jobId}"
+	@GetMapping("/viewJobs/{recruId}")//1st show this on ui after that map that job with emplyeee using /viewjobapplications/{jobId}"
 	public ResponseEntity<?> viewAllJobs(@PathVariable long recruId){ 
 		
 		
@@ -68,6 +74,13 @@ public class RecruiterController {
 	@DeleteMapping("/delete/{userId}")
 	public String deleteUserDetails(@PathVariable long userId) {
 		System.out.println("in del Recruiter " + userId);
+		
+		
+		
+		
+		
+		
+		
 		return userService.deleteUserDetails(userId);
 	}
 	
@@ -76,7 +89,7 @@ public class RecruiterController {
 	public String changeRecruiterDetails(@PathVariable long recruId,@RequestBody @Valid List<Job>jobList) {
 		System.out.println("in chnage Recruiter " + recruId);		
 		
-		System.out.println("iin controleer@@@@@@@@@@@@@@000000000000000000000000@@@@@@@@@ " + jobList);	
+		
 		
 		return recService.addNewJobs(recruId, jobList);
 	}
@@ -86,6 +99,9 @@ public class RecruiterController {
 	public String deleteJobById(@PathVariable long jobId) {
 		System.out.println("in chnage Employee " + jobId);		
 			
+		empRepo.RemoveAppliedEmployees(jobId);
+		
+		
 		
 		return recService.deleteJobById(jobId);
 	}
@@ -93,7 +109,7 @@ public class RecruiterController {
 	
 	
 	@PreAuthorize("hasRole('ROLE_RECRUITER')")
-	@PostMapping("/selectcandidate/{empId}")
+	@GetMapping("/selectcandidate/{empId}")
 	public String callCandidate(@PathVariable long empId) {
 		
 		
@@ -105,6 +121,34 @@ public class RecruiterController {
 	
 	
 	
+	
+	@PreAuthorize("hasRole('ROLE_RECRUITER')")
+	@GetMapping("/search/{skills}/{exp}")
+	public ResponseEntity<?> searchEmployeeBySkillsAndExp(@PathVariable String skills,@PathVariable Double exp) {
+		System.out.println("in employee search");      
+		return  ResponseEntity.ok(recService.searchEmployeeBySkillsAndExp(skills,exp));//u can send object wrap in response entity //or with status code or see readme
+	}
+	
+	
+	
+	@PreAuthorize("hasRole('ROLE_RECRUITER')")
+	@PutMapping("/editcompleterecru/{id}")
+	public ResponseEntity<?> recruiterCompleteDetailsEdit(@PathVariable long id , @RequestBody @Valid RecruiterFullEditRequest request) {
+		System.out.println("in rec edit");
+		
+
+		return  ResponseEntity.ok(recService.recruiterCompleteDetailsEdit(id,request ));//u can send object wrap in response entity //or with status code or see readme
+	} 
+	
+	
+	@PreAuthorize("hasRole('ROLE_RECRUITER')")
+	@GetMapping("/viewRecruiterDetails/{recId}")
+	public ResponseEntity<?> viewRecruiterDetails(@PathVariable long recId){
+		
+		
+		return  ResponseEntity.ok(recService.viewRecruiterDetails(recId));
+		
+	}
 	
 	
 	

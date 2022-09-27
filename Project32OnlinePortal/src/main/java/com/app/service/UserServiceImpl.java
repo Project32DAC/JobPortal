@@ -1,12 +1,15 @@
 package com.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +18,18 @@ import com.app.dto.UserDTO;
 import com.app.dto.UserLoginRequest;
 import com.app.dto.UserLoginResponse;
 import com.app.dto.UserRegResponse;
-
+import com.app.dto.UserRole;
+import com.app.entities.Job;
+import com.app.entities.Recruiter;
 import com.app.entities.UserEntity;
+import com.app.repository.EmployeeRepository;
+import com.app.repository.RecruiterRepository;
 import com.app.repository.RoleRepository;
 import com.app.repository.UserRepository;
 
 @Service
 @Transactional
+
 public class UserServiceImpl implements IUserService {
 	// dep : user repo n role repo
 	@Autowired
@@ -29,6 +37,12 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private RoleRepository roleRepo;
+	
+	@Autowired
+	private EmployeeRepository empRepo;
+	
+	@Autowired
+	private RecruiterRepository recruRepo;
 
 	// mapper
 	@Autowired
@@ -36,6 +50,14 @@ public class UserServiceImpl implements IUserService {
 	// password enc
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	@Autowired
+	private EntityManager em;
+	
+	
+	
+	@Autowired
+	private EmailSenderService eService;
 
 	@Override
 	public UserRegResponse registerUser(UserDTO user) {
@@ -50,6 +72,34 @@ public class UserServiceImpl implements IUserService {
 		userEntity.setPassword(encoder.encode(user.getPassword()));
 		// 4 : Save user details
 		UserEntity persistentUser = userRepo.save(userEntity);
+		
+		String CandidateName=user.getFirstName()+" "+user.getLastName();
+		String emailDetails=user.getEmail();
+		String password=user.getPassword();
+		
+		eService.sendSimpleEmail(/*emailDetails*/"sourabhpatil8282@gmail.com",
+				"Dear" + " " + CandidateName + "," + "\r\n" + "\r\n" + "\r\n" + "\r\n"
+
+						+
+
+"Thank you for registering to "+"ONLINE JOB PORTAL"+"\r\n"+
+
+"We will send you a  notifications on this email regarding furhter updates "
++"\r\n"+
+"Your Registred Mail = "+emailDetails +"\r\n"+
+"Your Password = "+password +"\r\n"+
+"Your UserId = "+persistentUser.getId()+"\r\n"+
+
+"Please feel free to share the feedback....\r\n"
+ 
+						
+						 + "\r\n" + "\r\n" + "\r\n" + "\r\n"
+						+ "Best Regards,\r\n" + "Online Job Portal Project 32Team from Acts Pune",
+				"Successfully  Registred with Online Job Portal ");
+		
+		
+		
+		
 		return new UserRegResponse("User registered successfully with ID " + persistentUser.getId());
 	}
 
@@ -77,6 +127,19 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public String deleteUserDetails(long userId) {
+		//asssume user id for emp 
+		/**/
+		UserEntity en=userRepo.findById(userId).get();
+		if(en.getUserRole().getRoleName()==UserRole.ROLE_RECRUITER) {
+			
+			Recruiter recru =recruRepo.findById(userId).get();
+			List<Job> jobList=recru.getJobs();
+			for (Job j :jobList) {
+				//native delete querey on emp_jobs table
+				empRepo.RemoveAppliedEmployees(j.getId());
+				
+			}				
+		}
 		userRepo.deleteById(userId);
 		return "deleted user details with id" + userId;
 		
@@ -88,6 +151,27 @@ public class UserServiceImpl implements IUserService {
 		
 		return user ;
 		
+	}
+
+	@Override
+	public List<UserEntity> getAllEmployees() {
+		List<UserEntity> listOfEmp=new ArrayList<UserEntity>();
+	String jpql="Select u from UserEntity u where u.userRole.roleName=:emrole";
+	listOfEmp=	em.createQuery(jpql,UserEntity.class).setParameter("emrole",UserRole.ROLE_EMPLOYEE).getResultList();
+		
+		//listOfEmp=userRepo.findAll();
+		
+		
+		
+		return listOfEmp;//.stream().filter(r->r.getUserRole().equals("ROLE_EMPLOYEE")).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<UserEntity> getAllRecruiters() {
+		List<UserEntity> listOfRecru=new ArrayList<UserEntity>();
+		String jpql="Select u from UserEntity u where  u.userRole.roleName=:recrurole";
+		listOfRecru=em.createQuery(jpql, UserEntity.class).setParameter("recrurole",UserRole.ROLE_RECRUITER).getResultList();
+		return listOfRecru;
 	}
 
 	

@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.entities.UserEntity;
 import com.app.repository.UserRepository;
 
-import lombok.ToString;
-
 @Service // or @Component also works!
 @Transactional
 

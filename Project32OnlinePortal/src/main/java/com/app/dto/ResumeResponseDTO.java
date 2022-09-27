@@ -1,10 +1,8 @@
 package com.app.dto;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.app.entities.Gender;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +32,9 @@ public class ResumeResponseDTO {
 
 	private double experience;
 
-	private long contact;
+	private long contact; 
+	
+	private File photo ;
 
 	private List<String> skills = new ArrayList<>();
 

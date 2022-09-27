@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 
 @Service
+@Async
 public class EmailSenderService {
 
     @Autowired
@@ -17,7 +19,7 @@ public class EmailSenderService {
                                 String body,
                                 String subject) {
     	
-    	System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&In mail sending method&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+    	//System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&In mail sending method&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
         SimpleMailMessage message = new SimpleMailMessage();
 
         message.setFrom("jobportalproject32@gmail.com");

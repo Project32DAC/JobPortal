@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.app.entities.UserEntity;
 
 import lombok.ToString;
+@SuppressWarnings("serial")
 @ToString
 public class CustomUserDetails implements UserDetails {
 	private UserEntity user;

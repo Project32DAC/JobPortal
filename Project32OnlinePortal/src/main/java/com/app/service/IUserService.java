@@ -5,13 +5,10 @@ package com.app.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import com.app.dto.UserDTO;
 import com.app.dto.UserLoginRequest;
 import com.app.dto.UserLoginResponse;
 import com.app.dto.UserRegResponse;
-
 import com.app.entities.UserEntity;
 
 public interface IUserService {
@@ -24,6 +21,10 @@ public interface IUserService {
 	UserRegResponse registerUser(UserDTO user);
 
 	Optional<UserEntity> findByEmail(String email);
+
+	List<UserEntity> getAllEmployees();
+
+	List<UserEntity>  getAllRecruiters();
 
 	
 	
