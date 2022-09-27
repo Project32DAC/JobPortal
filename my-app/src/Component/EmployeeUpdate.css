@@ -1,0 +1,46 @@
+.empupdate {
+    height: 1000px;
+
+}
+
+.emp-update{
+    
+margin-top: -1rem;
+
+
+}
+
+.emp-update-header{
+font-family:serif;
+font-weight: bold;
+color: rgb(255, 255, 255);
+text-shadow: 1px 2px 1px rgb(17, 17, 17);
+}
+
+
+.empleftside {
+    height: 1024px;
+   background-image: linear-gradient(to bottom right,#D148F7, #19C3D5)   ;
+}
+.emprightside{
+    height: 1024px;
+    background-color: rgb(251, 239, 255);
+}
+
+.updateimg {
+    height: 400px;
+    margin-top: 2.7rem;
+    margin-left: 0.8rem;
+    width: 460px;
+}
+.updatepage{
+    font-family: "serif";
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 2px 1px rgb(17, 17, 17);
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 3rem;
+}
+.buttonjsp{
+    margin-top: 10%;
+}

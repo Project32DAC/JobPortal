@@ -1,0 +1,15 @@
+.addjob{
+    height: 700px;
+ 
+}
+.add-job{
+    margin-top: 2rem;
+}
+
+.addjobitalic {
+    font-family:"serif";
+    color: rgb(254, 254, 254);
+    text-shadow: 1px 2px 1px rgb(17, 17, 17);
+    font-weight: bolder;
+    text-align: center;
+}

@@ -1,0 +1,94 @@
+.search-emp {
+    background-color: #bfe4ef;
+    margin-left: 1rem;
+    margin-right: -0.7rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.search-table {
+    width: 75vh;
+    margin-left: 1rem;
+    border: 0.5em;
+}
+
+.search-info {
+    background-color: #bfe4ef;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+
+}
+
+
+
+.backgroundcolor {
+    background-color: #bfe4ef;
+}
+
+
+tr.search {
+    background-color: #a8ebff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+table.job {
+    width: 99vh;
+
+}
+
+.search-details {
+    border-radius: 25px;
+
+}
+
+.td1 {
+    width: 70vh;
+
+}
+
+.td2 {
+    width: 60vh;
+
+}
+
+.td3 {
+    width: 20vh;
+
+}
+
+hr {
+    width: 90%;
+    background-color: black;
+    opacity: 0.5;
+    height: 3px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.margintops {
+    margin-top: 5.8rem;
+    margin-left: -8.7rem;
+
+}
+
+.search-box {
+    /* background-color: #c0d6f2; */
+    background-image: linear-gradient(to bottom right,#e695fd, #96eef8)   ;
+}
+
+/* .searchBox
+{
+    margin: 1rem;
+    width: 10rem;
+} */
+.alignsearch {
+    text-align: center;
+    margin: 1px;
+    padding: 0.5em;
+}

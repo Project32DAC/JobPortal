@@ -1,7 +1,7 @@
 //isLoggedIn=>
 
 export const isLoggedIn = () => {
-    let data = localStorage.getItem("data");
+    let data = sessionStorage.getItem("data");
     if (data != null || data != undefined)
     { return true ;}
     else
@@ -11,21 +11,21 @@ export const isLoggedIn = () => {
   //doLogin=> data=>set to localstorage
   
   export const doLogin = (data,next) => {
-    localStorage.setItem("data", JSON.stringify(data));
+    sessionStorage.setItem("data", JSON.stringify(data));
     next()
   };
   
   //doLogout=> remove from localStorage
   
   export const doLogout = (next) => {
-    localStorage.removeItem("data");
+    sessionStorage.removeItem("data");
     next()
   };
   
   //get currentUser
   export const getCurrentUserDetail = () => {
     if (isLoggedIn()) {
-      return JSON.parse(localStorage.getItem("data")).user;
+      return JSON.parse(sessionStorage.getItem("data")).user;
     } else {
       return undefined;
     }
@@ -33,8 +33,8 @@ export const isLoggedIn = () => {
   //get current user id
   export const getCurrentUserid = () => {
     if (isLoggedIn()) {
-      console.log(JSON.parse(localStorage.getItem("data")).user.id)
-      let userID=JSON.parse(localStorage.getItem("data")).user.id;
+      console.log(JSON.parse(sessionStorage.getItem("data")).user.id)
+      let userID=JSON.parse(sessionStorage.getItem("data")).user.id;
       return userID;
     } else {
       return 3;
@@ -43,7 +43,7 @@ export const isLoggedIn = () => {
   
   export const getToken=()=>{
     if(isLoggedIn()){
-      return JSON.parse(localStorage.getItem("data")).jwt
+      return JSON.parse(sessionStorage.getItem("data")).jwt
     }else{
       return null;
     }
@@ -52,7 +52,7 @@ export const isLoggedIn = () => {
   export const roleByLoggedin=()=>
   {
     if(isLoggedIn()){
-      const id =JSON.parse(localStorage.getItem("data")).user.userRole.id;
+      const id =JSON.parse(sessionStorage.getItem("data")).user.userRole.id;
       console.log(id)
       if(id===1)
       {
@@ -70,4 +70,14 @@ export const isLoggedIn = () => {
     else{
       return null;
     }
+  }
+  export const setCurrentJobId=(jobId)=>
+  {
+    sessionStorage.setItem("jobId",jobId);
+  }
+  export const getCurrentJobId=()=>
+  {
+    let data = sessionStorage.getItem("jobId");
+
+    return data;
   }

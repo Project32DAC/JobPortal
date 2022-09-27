@@ -1,0 +1,48 @@
+img.recimg {
+    background-repeat: no-repeat;
+    background-size: cover;
+display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    width: 99vh;
+    height: 99vh;
+}
+.recheader{
+    height: 99vh;
+    margin-top: 2rem;
+    color: white;
+    font-size: large;
+    text-shadow: 1px 2px 1px rgb(17, 17, 17);
+    padding: 0.5rem;
+    font-family:"serif";
+    height: 50px;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+   
+}
+.recleftside{
+    background-image: linear-gradient(to bottom right,#D148F7, #19C3D5)   ;
+    height: 99vh;
+    text-align: center;
+    font-family:"serif";
+    color: aliceblue;
+    text-shadow: 3px 5px 5px black;
+            
+}
+
+.rec-button{
+    border: 1px black;
+    border-radius: 20px;
+    background-color: aliceblue;
+    margin: 5rem;
+    height: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+}
+
+
+    
+    
+    

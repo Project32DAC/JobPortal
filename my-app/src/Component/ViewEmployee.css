@@ -1,0 +1,27 @@
+.allempinfo {
+    text-align: center;
+
+    background-image: linear-gradient(to bottom right,#D148F7, #19C3D5);
+    /* background-image: linear-gradient(to bottom right,#D148F7, #19C3D5)   ; */
+    height: 99vh;
+}
+
+.emptable {
+    margin-top: 2rem;
+    border: 3px black;
+    background-color: rgb(255, 255, 255);
+
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6), 0 20px 20px 0 rgba(0, 0, 0, 0.6);
+}
+
+.empitalic {
+    font-family:serif;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 2px 1px rgb(17, 17, 17);
+    font-weight: bolder;
+}
+
+.empheading {
+    font-size: larger;
+    background-color: rgb(153, 255, 221);
+}

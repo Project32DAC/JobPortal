@@ -44,3 +44,18 @@ img.flag {
     margin-right: auto;
     height: 50px;
 }
+.searchbutton{
+    
+    /* margin-left: 22%; */
+    margin-left: 19%;
+    margin-top: -15%;
+   margin-right: 15%;
+   /* margin-top: 9%; */
+   margin-bottom: 45%;
+   width: 100px;
+   height: 50px;
+    
+}
+.searchname{
+    margin-top:50%;
+}

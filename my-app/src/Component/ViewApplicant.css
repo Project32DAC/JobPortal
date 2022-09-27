@@ -1,0 +1,25 @@
+.appheading {
+    font-size: larger;
+    background-color: rgb(172, 153, 255);
+}
+.appname{
+    font-family:serif;
+    color: rgb(255, 255, 255);
+    text-shadow: 1px 2px 1px rgb(17, 17, 17);
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 3rem;
+}
+.appinfo{
+    text-align: center;
+
+    background-color: rgb(168, 214, 254);
+    height: 99vh;
+}
+.apptable{
+    margin-top: 2rem;
+    border: 3px black;
+    background-color: rgb(255, 255, 255);
+
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6), 0 20px 20px 0 rgba(0, 0, 0, 0.6);
+}

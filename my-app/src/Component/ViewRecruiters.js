@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import {Table,Container} from "reactstrap";
 import Base from './Base';
-import { getAllUser } from '../services/user-service';
+import { fetchAllRecruiters } from '../services/user-service';
 import { toast } from 'react-toastify';
 import { deleteUser } from '../services/user-service';
 import { Button } from 'reactstrap';
-import "./ListAllUser.css"
+import "./ViewRecruiters.css";
 
 
-const ListAllUser=()=> {
+const ViewRecruiters=()=> {
 
 
 const [users,setUsers]=useState([]);
 const init = () =>{
-    getAllUser().then((data) => {
+    fetchAllRecruiters().then((data) => {
         console.log(data)
         setUsers(data)
     }).catch(error => {
@@ -41,7 +41,7 @@ useEffect(()=>{
 
 console.log("userdeatils");
 // console.log(getAllUser());
-getAllUser().then((data) => {
+fetchAllRecruiters().then((data) => {
     console.log(data)
     setUsers(data)
 }).catch(error => {
@@ -54,20 +54,19 @@ getAllUser().then((data) => {
 
   return (
     <Base>
-          <div className='alluserinfo' >
-            <br></br>
-            <Container>
-                  <h1 class="useritalic"> All User Information</h1>
-                  <div className='usertable' >
-              <Table striped bordered hover stickyHeader >
-              
-                <thead >
-                    <tr className="userheading">
+          <div className='allrecinfo'>
+              <br></br>
+              <Container>
+                  <h1 class="recitalic">All Recruiters Information</h1>
+                  <div className='rectable'>
+                      <Table striped bordered hover stickyHeader>
+                <thead>
+                     <tr className="appheading">
                         <th>Id</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
-                          <th>Delete User</th>
+                        <th>Delete User</th>
                         {/* <th>Password</th> */}
                         {/* <th>Role Id</th> */}
                     </tr>
@@ -87,7 +86,7 @@ getAllUser().then((data) => {
                                         <td>
                                         <button className="btn btn-danger ml-2" onClick={() => {
                                                                  deleteUsers(user.id);
-                                            }}>DELETE</button>
+                                                            }}>DELETE</button>
                                     {/* <Button color="blue" onClick = {deleteUsers(user.id)}>Delete</Button> */}
                                     </td>
                                     </tr>;
@@ -96,12 +95,12 @@ getAllUser().then((data) => {
                     }
                 </tbody>
             </Table>
-            </div>
 
-              </Container>
-    </div>
+</div>
+    </Container>
+          </div>
     </Base>
     
   )
 }
-export default ListAllUser;
+export default ViewRecruiters;

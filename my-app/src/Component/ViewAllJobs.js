@@ -6,13 +6,16 @@ import { toast } from 'react-toastify';
 import { deleteJob } from '../services/user-service';
 import { Button } from 'reactstrap';
 import { getCurrentUserid } from '../auth';
-
+import { setCurrentJobId } from '../auth';
+import { useNavigate } from 'react-router-dom';
+import "./ViewAllJobs.css"
 
 const ViewAllJobs=()=> {
 
 
 const [jobs,setJobs]=useState([]);
-// const [users,setUsers]=useState([]);
+
+const navigate = useNavigate ();
 
 const deleteJobs = (jobId) => {
     deleteJob(jobId).then((response) =>{
@@ -30,11 +33,16 @@ const deleteJobs = (jobId) => {
     getAllJobs(getCurrentUserid()).then((data) => {
         console.log(data)
         setJobs(data)
-        toast.success("jobs loaded");
+       
     }).catch(error => {
         console.log(error)
         toast.error("something went wrong")
     })
+ }
+ const gotoApplicant=(jobId)=>
+ {
+    setCurrentJobId(jobId)
+    navigate("/recruiter/viewApplicant");
  }
 useEffect((e)=>{
 //get all jobs for recruiter
@@ -49,18 +57,27 @@ console.log("userdeatils");
 
   return (
     <Base>
+          <div className="viewalljob"
+              style={{
+
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'contain',
+              }} >
+
         <Container>
-        <h1>Recuriter Page</h1>
-            <Table>
+        <br></br>
+                  <h1 class="alljobitalic">Posted Job List</h1>
+                  <div className='alljobtable'>
+              <Table style={{ textAlign: "center" }} striped hover stickyHeade bordered>
                 <thead>
-                    <tr>
+                  <tr className="alljobheading">
                         <th>Job id</th>
                         <th>Job Profile</th>
                         <th>Vacancies</th>
                         <th>Experience</th>
                         <th>Publish Date</th>
-                        <th>Job Decription</th>
-                        <th>Delete Action</th>
+                        <th>Job Description</th>
+                        <th>Action</th>
                     </tr>
                  </thead>
                 <tbody>
@@ -76,7 +93,10 @@ console.log("userdeatils");
                                         <td>{job.publishDate}</td>
                                         <td>{job.jobDescription}</td>
                                         <td>
-                                        <button className="btn btn-danger ml-2" onClick = {() => deleteJobs(job.id)}>Delete</button>
+                                            <Button color="primary" onClick={() => { gotoApplicant(job.id) }} >View Applicants</Button>
+                                            &nbsp; &nbsp; &nbsp;
+                                            <button className="btn btn-danger ml-2" onClick={() => deleteJobs(job.id)}>Delete</button>
+
                                 </td>
                                     </tr>);
                                 }
@@ -84,9 +104,10 @@ console.log("userdeatils");
                     }
                 </tbody>
             </Table>
-
+</div>
 
     </Container>
+    </div>
     </Base>
     
   )

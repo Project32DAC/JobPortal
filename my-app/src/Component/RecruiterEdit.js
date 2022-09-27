@@ -22,10 +22,15 @@ import { deleteRecruiterAccount } from "../services/user-service";
 import { useNavigate } from "react-router-dom";
 import { NavLink as ReactLink } from "react-router-dom";
 import AddJob from "./AddJob";
+import "./RecruiterEdit.css"
+import userEvent from "@testing-library/user-event";
+import { getCurrentUserDetail } from "../auth";
+
 const RecruiterEdit = () =>
 {
     let navigate = useNavigate()
-    // const[user, setUser] = useState(undefined)
+    let isSubmit = true;
+    const[user, setUser] = useState("")
     // const [companyName,SetcompanyName]=useState('');
     // const[companyAddress,SetcompanyAddress]=useState('');
     // const[companyContact,SetcompanyContact]=useState('');
@@ -50,10 +55,15 @@ const RecruiterEdit = () =>
         companyName:'',
         companyAddress:'',
         companyContact:'',
-        
-        
-    
        })
+
+
+       const [formErrors, setFormErrors] = useState({});
+
+
+
+
+
        // handle change
    const handleChangeforCompany=(event,property)=>{
    
@@ -96,19 +106,97 @@ const RecruiterEdit = () =>
    }
    
 
+   const validate = (values) => {
+    const errors = {};
+    const regex = /^[6-9]\d{9}$/gi;
+
+    if (!values.companyName) {
+        isSubmit=false;
+      errors.companyName = "Company Name is required!";
+    }
+    
+    if (!values.companyAddress) {
+        isSubmit=false;
+    errors.companyAddress = " Company Address is required!";
+    }  
+    if (!values.companyContact) {
+        isSubmit=false;
+      errors.companyContact = "Contact is required!";
+    } else if (!regex.test(values.companyContact)) {
+        isSubmit=false;
+      errors.companyContact = "This is not a valid contact format!";
+    }
+
+    // if (!values.jobs.jobProfile) {
+    // errors.jobProfile = " jobProfile is required!";
+    // } 
+
+    // var vacancy= values.jobs.jobVacancy
+    // if (!values.jobs.jobVacancy) {
+    // errors.jobVacancy = " jobVacancy is required!";
+    // }else if (isNaN(values.jobs.jobVacancy) || values.jobs.jobVacancy > 0 ) {
+    //     errors.jobVacancy = "This is not a valid format! Or Vacancy cant be zero";
+    //   }  
+    //   if (!values.jobs.experience) {
+    //     errors.experience = " experience is required!! if not enter 0";
+    //     } 
+   
+    return errors;
+  };
+
+//   const validate2 = (values) => {
+//     const errors = {};
+
+//     if (!values.jobProfile) {
+//     errors.jobProfile = " jobProfile is required!";
+//     } 
+
+//     // var vacancy= values.jobs.jobVacancy
+//     if (!values.jobVacancy) {
+//     errors.jobVacancy = " jobVacancy is required!";
+//     }else if (isNaN(values.jobVacancy) || values.jobVacancy > 0 ) {
+//         errors.jobVacancy = "This is not a valid format! Or Vacancy cant be zero";
+//       }  
+//       if (!values.experience) {
+//         errors.experience = " experience is required!! if not enter 0";
+//         } 
+   
+//     return errors;
+//   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 //    }
-//    useEffect(
-//     ()=>
-//     {
+   useEffect(
+    ()=>
+    {
 
-//        setUser(getCurrentUserDetail())
-//     },
-//     []
-//      )
+       setUser(getCurrentUserDetail())
+    },
+    []
+     )
    
-   const editForm=(event)=>{
+   const editForm=async(event)=>{
     event.preventDefault()
+    console.log(data)
+    //data validation
+    setFormErrors(validate(data))
+    // setFormErrors(validate2(prejobs))
     
 // const Obj={jobProfile,jobVacancy,experience};
         let arr = [];
@@ -122,7 +210,7 @@ const RecruiterEdit = () =>
     data['jobs']=arr;
     console.log(data);
     
-    recruiteredit(data,getCurrentUserid()).then((resp)=>{
+    recruiteredit(data,getCurrentUserid(),isSubmit).then((resp)=>{
         console.log(resp);
         console.log("success log");
         toast.success("succesfull!!");
@@ -204,114 +292,122 @@ const RecruiterEdit = () =>
     
     
 }
-const navigateTo=()=>{
-    // setData({
-    //     companyName:'',
-    //     companyAddress:'',
-    //     companyContact:''
-        
-    
-
-    // })
-    // SetpreJobs(
-    //     {
-    //          jobProfile:'',
-    //          jobVacancy: '',
-    //          experience:'',
-    //          publishDate:'',
-    //          jobDescription:''
-
-    //     }
-    // )
-    console.log("navigate to addjobs");
-    navigate("/addjobs");
-   }
 
     return(
         <div>
-        <Base>
+            <Base>
+                <div className="row">
+                    <div className="recruiterleftside col-4">
+                        <div>
+
+                           
+                            <div className="row rec-profile">
+                                <div >
+                                    <h4><b>Welcome  </b></h4>
+                                    <h5><b>First Name:</b> {user.firstName}</h5>
+                                    <h5><b>Last Name:</b> {user.lastName}</h5>
+                                   
+                                </div>
+                                
+
+                            </div>
+                            
+                            <div className="employee-button" style={{ display: 'flex', justifyContent: 'center' }} >
+                              
+                                <Button onClick={() => { navigate("/recruiter/addjobs") }} color="primary">Add More Jobs</Button>
+                            </div>
+
+                            <img className="resumeimg img-fluid rounded " src="../Images/rec3.gif" alt="recruiter" />
+
+                        </div>
+                    </div>
+                    <div className="recruiterrightside col-8">
+                        <div>
         <Container>
-        <div>
-            {/* <Button onClick={moveToResume} >view my jobs</Button> */}
-            <Button color="danger" onClick={DeleteMyAccount}>Delete My Account</Button>
-            {/* <Button onClick={AddJobs}>Delete My Account</Button> */}
-            {/* <NavLink tag={ReactLink} to="/addjob">Login</NavLink> */}
-        </div>
-        <h1>Recruiter Page</h1>
+       
+        
             <Row className="mt-4">
 
                
                <Col sm={{size: 6, offset: 3}}>
                <Card color="dark" outline>
                 <CardHeader>
-                    Fill Information to register
+                    <b>Fill Information To Register</b>
                 </CardHeader>
                 <CardBody>
                     {/*creating form*/}
                     <Form onSubmit= {editForm}>
                         <FormGroup>
-                            <Label for="companyName">Enter company name</Label>
+                            <Label for="companyName"><b>Company Name</b></Label>
                             <Input type="text" 
-                            placeholder="Enter here"
+                            placeholder="Enter Company Name"
                             id="companyName"
                             onChange={(e)=>handleChangeforCompany(e,'companyName')}
                             // onChange={(e)=>SetcompanyName(e.target.value)}
                             value={data.companyName}
                             // value={companyName}
                             ></Input>
+                            <p style={{color: "red"}}>{formErrors.companyName}</p>
                         </FormGroup>
 
                         <FormGroup>
-                            <Label for="companyAddress">Enter Address</Label>
+                            <Label for="companyAddress"><b>Company Address</b></Label>
                             <Input type="text" 
-                            placeholder="Enter here"
+                            placeholder="Enter Company Address"
                             id="companyAddress"
                             onChange={(e)=>handleChangeforCompany(e,'companyAddress')}
                             value={data.companyAddress}
                             // onChange={(e)=>SetcompanyAddress(e.target.value)}
                             // value={companyAddress}
                             ></Input>
+                            <p style={{color: "red"}}>{formErrors.companyAddress}</p>
                         </FormGroup>
 
                         <FormGroup>
-                            <Label for="companyContact">Enter phone number</Label>
+                            <Label for="companyContact"><b>Phone Number</b></Label>
                             <Input type="text" 
-                            placeholder="Enter here"
+                            placeholder="Enter Phone Number"
                             id="companyContact"
                             onChange={(e)=>handleChangeforCompany(e,'companyContact')}
                             value={data.companyContact}
                             // onChange={(e)=>SetcompanyContact(e.target.value)}
                             // value={companyContact}
                             ></Input>
+                            <p style={{color: "red"}}>{formErrors.companyContact}</p>
                         </FormGroup>
 
                         <FormGroup>
-                            <Label for="jobs">Enter job profile recquired</Label>
+                            <Label for="jobs"><b>Job Profile</b></Label>
                             <Input type="text" 
-                            placeholder="Enter here"
+                            placeholder="Enter Job Profile"
                             id="jobProfile"
+                            required
                             onChange={(e)=>handleChangeforJobs(e,'jobProfile')}
                             value={prejobs.jobProfile}
                             // onChange={(e)=>SetJobProfile(e.target.value)}
                             // value={jobProfile}
                             ></Input>
+                            <p style={{color: "red"}}>{formErrors.jobProfile}</p>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="jobs">Enter vacancy recquired</Label>
+                            <Label for="jobVacancy"><b>Vacancy</b></Label>
                             <Input type="number" 
-                            placeholder="Enter here"
+                            placeholder="Enter Vacancy "
                             id="jobVacancy"
-                            onChange={(e)=>handleChangeforJobs(e,'vacancy')}
-                            value={prejobs.vacancy}
+                            required
+                            onChange={(e)=>handleChangeforJobs(e,'jobVacancy')}
+                            value={prejobs.jobVacancy}
                             // onChange={(e)=>SetJobVacancy(e.target.value)}
                             // value={jobVacancy}
                             ></Input>
+                            <p style={{color: "red"}}>{formErrors.jobVacancy}</p>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="jobs">Enter Experience recquired</Label>
+                            <Label for="jobs"><b>Experience</b></Label>
                             <Input type="number" 
-                            placeholder="Enter here"
+                            placeholder="Enter Experience "
                             id="experience"
+                            required
                              onChange={(e)=>handleChangeforJobs(e,'experience')}
                             // //    onChange={updateValues}
                             // //    onKeyPress={keyPressed}
@@ -319,15 +415,17 @@ const navigateTo=()=>{
                             // onChange={(e)=>SetExperience(e.target.value)}
                             // value={experience}
                             ></Input>
+                            <p style={{color: "red"}}>{formErrors.experience}</p>
                         </FormGroup>
                         
                         <FormGroup>
                                 <Label for="exampleDate">
-                                 Publish Date
+                                <b>Publish Date</b>
                                 </Label>
                                 <Input
                                 id="pub_date"
                                 name="date"
+                                required
                                 placeholder="date placeholder"
                                 type="date"
                                 onChange={(e)=>handleChangeforJobs(e,'publishDate')}
@@ -336,10 +434,11 @@ const navigateTo=()=>{
                             </FormGroup>
 
                         <FormGroup>
-                            <Label for="job_description">Job Description</Label>
+                            <Label for="job_description"><b>Job Description</b></Label>
                             <Input type="text" 
-                            placeholder="Enter here"
+                            placeholder="Enter Job Description "
                             id="lastjob_descriptionName"
+                            required
                             onChange={(e)=>handleChangeforJobs(e,'jobDescription')}
                             value={prejobs.jobDescription}
                             ></Input>
@@ -348,20 +447,20 @@ const navigateTo=()=>{
                         
 
                         <Container className="text-center">
-                            <Button color="dark">Register</Button>
+                            <Button color="primary">Register</Button>
                             <Button onClick={resetData} color="secondary" type="reset" className="ms-2">Reset</Button>
                         </Container>
                     </Form>
-                    <Container className="text-center">
-                            <Button onClick={ navigateTo } color="dark">Add more jobs</Button>
-                            
-                        </Container>
+                    
                  </CardBody>
                  </Card>
                </Col> 
             </Row>
             
         </Container>
+                        </div>
+                    </div>
+                </div>
         </Base>
         </div>
     );

@@ -1,0 +1,44 @@
+.search-rec {
+  
+    height: 99vh;
+    background-color:  #bfe4ef;
+
+}
+.search-rec1 {
+    background-color: #bfe4ef;
+    margin-left: 1rem;
+    margin-right: -0.7rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.recsearch-table {
+    width: 75vh;
+    margin-left: 1rem;
+    border: 0.5em;
+}
+
+.search-recdata{
+        margin-top: 2rem;
+            border: 1px rgb(73, 72, 72);
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6), 0 20px 20px 0 rgba(0, 0, 0, 0.6);
+
+}
+
+.searchrecheader{
+    font-size: larger;
+   background-color: rgb(172, 153, 255);
+text-align: center;
+vertical-align: middle;
+}
+
+.searchname {
+    text-align: center;
+    margin: 1px;
+    padding: 0.5em;
+}
+.search-box {
+    background-color: #c0d6f2;
+}

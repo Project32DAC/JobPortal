@@ -1,22 +1,20 @@
 
 .signinleftside {
-    background-image: linear-gradient(to bottom right, #ff325e, #0ee7ff);
+    background-image: linear-gradient(to bottom left, #e69efa, #19bdce);
     padding-top: 3rem;
     text-align: center;
     color: aliceblue;
     text-shadow: 3px 3px 7px black;
+    height: 99vh;
 
 }
 
 .signinrightside {
-    background-image: linear-gradient(to bottom left, #ff325e,  #0ee7ff)
+    background-image: linear-gradient(to top left, #19bdce,#e69efa);
+    height: 99vh;
 }
 
 
-
-.col- {
-    height: 100%;
-}
 
 img.sign1 {
     height: 350px;
@@ -26,10 +24,14 @@ img.sign1 {
 }
 
 .container {
-    margin-top: 7rem;
-   
+    margin-top: 2rem;
+
 }
 
 .card {
     box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6), 0 20px 20px 0 rgba(0, 0, 0, 0.6);
+}
+.background
+{
+    background-image: linear-gradient(to bottom left, #D148F7, #19C3D5)
 }
