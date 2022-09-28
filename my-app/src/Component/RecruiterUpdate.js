@@ -173,7 +173,10 @@ const RecruiterUpdate = () =>
     }).catch((error)=>{
         console.log(error)
         console.log("error log");
-        toast.error("something gone wrong failed");
+        //invalid recruiter id
+        if (error.response.data.message == "Invalid recruiter id" ) {
+            toast.error("Please complete your profile first in setup profile page")
+        }
         // handling errors 
         
     })

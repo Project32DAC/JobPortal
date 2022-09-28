@@ -36,7 +36,9 @@ const deleteJobs = (jobId) => {
        
     }).catch(error => {
         console.log(error)
-        toast.error("something went wrong")
+        if (error.response.data.message == "Invalid Recruiter Id") {
+            toast.error("Please complete your profile first in setup profile page")
+        }
     })
  }
  const gotoApplicant=(jobId)=>

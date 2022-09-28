@@ -57,7 +57,7 @@ const EmployeeEdit = () =>
         isSubmit=false;
     }else if (isNaN(ssc) || ssc < 0 || ssc >= 100) {
       isSubmit=false;
-        errors.sscMarks = "marks should be between 0 to 100!";
+        errors.sscMarks = "Marks should be between 0 to 100!";
       }
       var hsc=values.hscMarks
     if (!values.hscMarks) {
@@ -65,15 +65,15 @@ const EmployeeEdit = () =>
     errors.hscMarks = " HSC Marks is required!";
     }else if (isNaN(hsc) || hsc < 0 || hsc >= 100) {
       isSubmit=false;
-        errors.hscMarks = "marks should be between 0 to 100!";
+        errors.hscMarks = "Marks  should be between 0 to 100!";
       }
       var degree=values.degreeMarks
     if (!values.degreeMarks) {
       isSubmit=false;
-    errors.degreeMarks = " marks should be between 0 to 100!";
+    errors.degreeMarks = " Marks  should be between 0 to 100!";
     }else if (isNaN(degree) || degree < 0 || degree >= 100) {
       isSubmit=false;
-        errors.degreeMarks = "marks should be between 0 to 100!";
+        errors.degreeMarks = "Marks should be between 0 to 100!";
       }
     if (!values.graduation) {
       isSubmit=false;
@@ -176,7 +176,7 @@ const EmployeeEdit = () =>
       
     } catch(error) {
       console.log(error)
-      toast.success("something went wrong check file size and file format(jpeg,jpg,png)");
+      toast.error("something went wrong check file size and file format(jpeg,jpg,png)");
     }
     toast.success("image uploaded successfully");
   }
@@ -211,7 +211,8 @@ const EmployeeEdit = () =>
     {
       toast.error("correct all fields and then submit")
     }
-    employeeedit(data,getCurrentUserid(),isSubmit).then((resp)=>{
+    employeeedit(data,getCurrentUserid(),isSubmit).
+    then((resp)=>{
        
         toast.success(" succesfull!! also upload image if uploaded ignore");
        
@@ -227,7 +228,7 @@ const EmployeeEdit = () =>
         }
         else
         {
-          toast.error("operat failed");
+          toast.error("operation failed");
         }
         setError(
             {

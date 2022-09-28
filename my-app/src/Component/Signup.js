@@ -119,12 +119,7 @@ const Signup = () =>
         console.log("error log");
         toast.error("signup failed");
         // handling errors 
-        setError(
-            {
-                errors:error,
-                isError:true
-            }
-        )
+       
     })
    }
 
@@ -212,7 +207,7 @@ const Signup = () =>
                             onChange={(e)=>handleChange(e,'role')}
                             value={data.role}
                             >
-                                <option>choose role</option>
+                                <option>Choose Role</option>
                                 <option value= "ROLE_EMPLOYEE">EMPLOYEE</option>
                                 <option value="ROLE_RECRUITER">RECRUITER</option>
                             

@@ -63,6 +63,12 @@ export default function ResumeInfo() {
 
     }).catch(error => {
       console.log(error)
+      if (error.response.data.message == "No entity found for query" ) {
+         toast.error("Please complete your profile first in setup profile page")
+     }
+     if (error.response.data.message == null ) {
+      toast.error("Please upload your image ")
+   }
     })
   }
   const submitSkillandExp = (event) => {
@@ -82,7 +88,8 @@ export default function ResumeInfo() {
     }).catch((error) => {
       console.log(error)
       console.log("error log");
-      toast.error("operation failed");
+      
+     
       // handling errors 
 
     })

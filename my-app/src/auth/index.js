@@ -19,6 +19,7 @@ export const isLoggedIn = () => {
   
   export const doLogout = (next) => {
     sessionStorage.removeItem("data");
+    sessionStorage.removeItem("jobId")
     next()
   };
   
@@ -37,7 +38,7 @@ export const isLoggedIn = () => {
       let userID=JSON.parse(sessionStorage.getItem("data")).user.id;
       return userID;
     } else {
-      return 3;
+      return ;
     }
   };
   

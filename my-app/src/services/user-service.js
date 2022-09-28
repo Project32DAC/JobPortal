@@ -74,7 +74,7 @@ export const deleteJob = (jobId) => {
 }
 //@PostMapping("/search/{jobProfile}/{exp}")
 export const getAllJobsforEmp = (job_profile, exp) => {
-    return privateAxios.get(`employee/search/${job_profile}/${exp}`)
+    return privateAxios.get(`/employee/search/${job_profile}/${exp}`)
         .then((response) => response.data);
 }
 //apply for this job

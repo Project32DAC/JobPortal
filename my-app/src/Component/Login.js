@@ -7,7 +7,6 @@ import {
     Label,
     Row,
     Col,
-
     Input,
     CardBody,
     FormGroup,
@@ -81,7 +80,7 @@ const Login = () => {
         loginUser(loginDetail,isSubmit).then((data) => {
             console.log("user login" + JSON.stringify(data));
             doLogin(data, () => {
-                console.log("login detail is saved to localstorage");
+                console.log("login detail is saved to storage");
                 //redirect to something according to role based
                 if (roleByLoggedin() === "admin") { navigate("/admin/home") }
                 else if (roleByLoggedin() === "employee") {
@@ -152,7 +151,7 @@ const Login = () => {
                                              Email
                                         </Label>
                                         <Input
-                                            defaultValue={"attar@gmail.com"}
+                                           
                                             type="text"
                                             id="email"
                                             placeholder="Enter Email"
@@ -176,12 +175,12 @@ const Login = () => {
                                         <p style={{ color: "red" }}>{formErrors.password}</p>
                                     </FormGroup>
                                      <Container className="text-center mt-5">
-                                        <Button color="primary" outline >
+                                        <Button color="primary"  style={{width:"19rem" }} >
                                             Login
                                         </Button>
                                        <br></br>
 
-                                        Dont have an account?<br /> <Button color="primary" onClick={() => { navigate("/Signup") }} >signup
+                                        Dont have an account?<br /> <Button color="primary" onClick={() => { navigate("/Signup") }} style={{width:"19rem" }} >Signup
                                         </Button>
                                     </Container>
                                 </Form>

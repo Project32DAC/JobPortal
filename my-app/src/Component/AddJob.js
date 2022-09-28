@@ -110,8 +110,15 @@ const AddJob = () =>
     }).catch((error)=>{
         console.log(error)
         console.log("error log");
-        toast.error("add job failed");
+        
         // handling errors 
+        if (error.response.data.message == 'Invalid Recruiter Id' ) {
+            toast.error("Please complete your profile first in setup profile page")
+        }
+        else
+        {
+            toast.error("add job failed");
+        }
               
     })
    }

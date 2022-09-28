@@ -36,9 +36,13 @@ const SearchForEmp = () => {
     const ApplyJobs = (jobId, jobname) => {
         applyThisJob(jobId, getCurrentUserid()).then((data) => {
             console.log(data)
-            toast.success("applied for job " + jobname);
+            toast.success("applied for job profile: " + jobname);
         }).catch(error => {
-            if(error.response.status==500)
+            if(error.response.data.message=="Invalid Employee Id")
+            {
+                toast.error("setup your profile to apply jobs in Setup Profile !!")
+            }
+            else if(error.response.status==500)
          {
                  toast.error("already applied for job")
         }
@@ -76,7 +80,7 @@ const SearchForEmp = () => {
                                                                 id="profile"
                                                                 name="profile"
                                                                 placeholder="Enter profile or Skill" 
-                                                                type="profile"
+                                                                type="text"
                                                                 onChange={(e) => setProfile(e.target.value)}
                                                                 value={profile}
                                                                 required
@@ -89,7 +93,7 @@ const SearchForEmp = () => {
                                                                 id="experience"
                                                                 name="experience"
                                                                 placeholder="Enter Experience"
-                                                                type="experience"
+                                                                type="number"
                                                                 onChange={(e) => SetExperience(e.target.value)}
                                                                 value={experience}
                                                                 required
