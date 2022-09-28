@@ -174,7 +174,7 @@ export default function ResumeInfo() {
                         </td>
                        
                         <td className="Personal-td2" rowspan="3" >
-                          <tr > <img src="../Images/a.png" alt="Candidate Photo" height="150px" width="150px" ></img></tr>
+                          <tr > <img src={`../Images/${getCurrentUserid()}.png`} alt="Candidate Photo" height="150px" width="150px" ></img></tr>
                         </td>
                       </tr>
                     </tr>
