@@ -145,7 +145,7 @@ public class RecruiterServiceImpl implements IRecruiterService{
 	//	recruiter.getJobs().addAll(jobList); 
 		   return "Successfully added new jobs...with Recruiter id :"+recruId ;
 		}
-		return "failed........to add jobs";
+		throw new ResourceNotFoundException("Invalid Recruiter Id") ;
 		
 	}
 
@@ -234,8 +234,10 @@ public class RecruiterServiceImpl implements IRecruiterService{
 			
 			 updateCount = em.createQuery(jpql).setParameter("cname", request.getCompanyName()).setParameter("adrs", request.getCompanyAddress()).setParameter("cc", request.getCompanyContact()).setParameter("rid", id).
 	               executeUpdate() ;
+			 return updateCount;
 		}
-		return updateCount;
+		throw new ResourceNotFoundException("Invalid recruiter id");
+		
 
 	}
 
