@@ -83,7 +83,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		String jpql1 = "Select e from Employee e where e.id=:uid";
 
 		Employee emp = em.createQuery(jpql1, Employee.class).setParameter("uid", empId).getSingleResult(); 
-		String id = "./"+empId+".png";
+		String id = "./my-app/public/Images/"+empId+".png";
 	//	ByteArrayInputStream data = new ByteArrayInputStream(emp.getPhoto()) ;
 		   
 	    File newFile = new File(id);
