@@ -2,23 +2,55 @@ import React from "react";
 import Base from "./Base";
 import "./Style.css";
 import "./Home.css";
-
-
+import { Input,Button } from "reactstrap";
+import { useNavigate } from "react-router-dom";
+import { isLoggedIn, roleByLoggedin } from "../auth";
+import { toast } from "react-toastify";
 
 
 const Home = () =>
-{
+
+{   const navigate = useNavigate();
+    
+  const  navigateTohome=()=>
+    {
+        if(!isLoggedIn())
+        {
+            toast.warning('Please login first !', {
+                position: toast.POSITION.TOP_CENTER
+            });
+        }
+        if(roleByLoggedin()==="admin")
+        { navigate("/admin/home")}
+        else if(roleByLoggedin()==="employee")
+        {
+            navigate("/employee/searchjob")
+        }
+        else
+        {
+            navigate("/recruiter/home")
+        }  
+    }
     return(
         <div>
         <Base>
-        </Base>
+        
             <div className="container-fluid ">
                 <div className="row" >
                     <div className="leftside col-7 ">
                         
-                        <div className="Home">
-                            <p>Find the <br></br> most exiting <br></br>jobs </p>
+                        <div className="row Home">
+                                <div ><p>Find the <br></br> most exiting <br></br>jobs</p></div>
+                                {/* <div className="col-6"> */}
+                                    {/* <br></br> */}
+                                    <div className="row " >
+                                    <div className="col-10 searchname"><Input type="text" style={{width:"43rem", height:"4.3rem" }} placeholder="Search Jobs"> Search here </Input></div>
+                                    
+                                    <div className="col-2"> <Button color="primary" className="searchbutton" align="center"  onClick={navigateTohome}>Search</Button> </div>
+                                {/* </div> */}
+                                </div>
                         </div>
+                       
 
                         <div>
                             <img className="office7" src="./Images/office7.gif" alt="office" />
@@ -35,30 +67,10 @@ const Home = () =>
                     </div>
                     
                 </div>
-                <div className="row bottom " >
-                    <div className="info col-3 "><h4>About us</h4>
-                        <div>
-                            <p> Heaven frucvitful doesn't cover <br></br>lesser
-                                dvsays appear creeping <br></br>seasons so behold.</p>
-                        </div>
-                    </div>
-                    <div className="info col-3 "><h4>Contact Info</h4>
-                        <div>
-                            Address :Your address goes here, your demo address.<br></br>
-                            Phone : +9998882222<br></br>
-                            Email : info@gmail.com
-                        </div>
-                    </div>
-                    <div className="info col-3 "><h4>Newsletter</h4>
-                        <div>
-                            Heaven fruitful doesn't <br></br>over lesser in days.<br></br> Appear creeping.
-                        </div>
-                    </div>
-                    <div className="info col-3 "><h4>Made In</h4>
-                        <div><img className="flag" src="./Images/india.png" alt="Flag" /></div>
-                    </div>
-                </div>
+                
+                
             </div>
+            </Base>
         </div>
     );
 };

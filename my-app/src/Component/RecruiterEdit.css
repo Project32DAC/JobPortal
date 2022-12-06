@@ -1,0 +1,23 @@
+.recruiterleftside {
+ 
+    background-image: linear-gradient(215deg ,#D148F7, #19C3D5) 
+}
+
+.recruiterrightside{
+    height: 1000px;
+    background-color: rgb(149, 255, 248);
+}
+
+img.rec1img {
+    height: 400px;
+    margin-top: 4rem;
+    margin-left: 1rem;
+    width: 400px;
+
+}
+.rec-profile {
+   
+    padding: 0.5rem;
+    font-family: "serif";
+    height: 180px;
+}

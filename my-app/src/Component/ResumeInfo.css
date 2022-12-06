@@ -1,0 +1,44 @@
+.resumepage{
+            font-family:"serif";
+            color: rgb(245, 238, 232);
+            text-shadow: 1px 2px 1px rgb(17, 17, 17);
+            font-weight: bolder;
+            text-align: center;
+            margin-top: 3rem;
+}
+
+/* .resumeimg img-fluid rounded  */
+.resumerightside{
+    height: 800px;
+    background-color: rgb(251, 239, 255);
+}
+.resumeleftside {
+    height: 800px;
+   background-image: linear-gradient(to bottom right,#D148F7, #19C3D5)   ;
+}
+
+.resume-table{
+border: 1px solid black;
+margin: 0 auto;
+margin-top: 2rem;
+background-color: rgb(216, 232, 251);
+box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.6), 0 20px 20px 0 rgba(0, 0, 0, 0.6);
+width: 80vh;
+
+font-size: 18px;
+
+}
+.personal{
+  width: 100%;
+}
+.personaldetails{
+    vertical-align: middle;
+}
+
+img.resumeimg {
+    height: 400px;
+    margin-top: 4rem;
+    margin-left: 2.8rem;
+    width: 400px;
+}
+

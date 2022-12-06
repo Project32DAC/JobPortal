@@ -1,0 +1,31 @@
+
+
+.employeerightside{
+    height: 1024px;
+   
+    background-color: rgb(224, 225, 239);
+}
+
+img.resumeimg {
+    height: 387px;
+    margin-top: 1rem;
+    margin-left: 3rem;
+    width: 375px;
+
+}
+
+.employeeprofile{
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    font-family: "serif";
+    height: 160px;
+    /* color: rgb(82, 92, 84); */
+}
+
+.newclass{
+    background-image: linear-gradient(to bottom right,#D148F7, #19C3D5);
+    
+}
+.Fillinfo{
+    text-align: center;
+}
