@@ -77,7 +77,7 @@ public class UserServiceImpl implements IUserService {
 		String emailDetails=user.getEmail();
 		String password=user.getPassword();
 		
-		eService.sendSimpleEmail(/*emailDetails*/"sourabhpatil8282@gmail.com",
+		eService.sendSimpleEmail(emailDetails,
 				"Dear" + " " + CandidateName + "," + "\r\n" + "\r\n" + "\r\n" + "\r\n"
 
 						+

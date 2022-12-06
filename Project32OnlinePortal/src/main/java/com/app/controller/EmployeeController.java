@@ -24,7 +24,7 @@ import com.app.service.IEmployeeService;
 import com.app.service.IUserService;
 
 @RestController // @Controller + @ResponseBody //i.e to pass respone in json so it is deserializon: added on ret types of req handling methods
-@CrossOrigin
+@CrossOrigin()
 @RequestMapping("/employee")
 public class EmployeeController {
 	@Autowired

@@ -70,7 +70,7 @@ public class RecruiterServiceImpl implements IRecruiterService{
 		
 		
 
-		transientRecru.setRecruiterUser(user); 
+		transientRecru.setRecruiterUser(user); //
 		transientRecru.setJobs(req.getJobs());
 		
 		

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.service.IUserService;
 
 @RestController // @Controller + @ResponseBody //i.e to pass respone in json so it is deserializon: added on ret types of req handling methods
-@CrossOrigin
+@CrossOrigin()
 @RequestMapping("/user")
 
 public class UserController {
